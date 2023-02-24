@@ -3,7 +3,7 @@
 		"module": "es2020",
 		"lib": ["ES2017", "DOM"],
 		"moduleResolution": "node",
-		"target": "ES2018",
+		"target": "ES2017",
 		"importsNotUsedAsValues": "error",
 		"preserveValueImports": true,
 		"isolatedModules": true,

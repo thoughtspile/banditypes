@@ -31,3 +31,15 @@ instance-based primitives: 612 / 374
 throw new TypeError(message || 'BandiType error') -> null[message || 'BandiType error']: 595 / 364
 
 const -> var: 583 / 361
+
+!tuple via array
+!instanceof via sample
+  - problematic sample
+  - long "constructor" word
+!=== -> ==
+!throw -> return null
+  - inconvenient
+  - uses optional chaining
+  - -26 from baseline / -18 from obscure error
+  - nullable items, fixing restores size
+!not cloning function in banditype
