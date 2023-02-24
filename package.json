@@ -1,0 +1,46 @@
+{
+  "name": "banditstash",
+  "version": "0.1.0",
+  "description": "Type-safe wrapper for localStorage / sessionStorage",
+  "author": "Vladimir Klepov v.klepov@gmail.com",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "engines": {
+    "node": "^14 || ^16 || >=18"
+  },
+  "scripts": {
+    "test": "npm run build && uvu dist/tests '.test.js$'",
+    "test:coverage": "c8 --100 npm test",
+    "format": "prettier --write --loglevel silent src",
+    "verify": "npm run format && npm run test:coverage",
+    "terser": "npx npx terser dist/index.js -m -c --toplevel > dist/index.min.js",
+    "size:raw": "cat dist/index.min.js | wc -c",
+    "size:gz": "cat dist/index.min.js | gzip -c | wc -c",
+    "size": "npm run terser && npm run size:raw && npm run size:gz",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thoughtspile/banditstash.git"
+  },
+  "keywords": [
+    "typescript",
+    "zod"
+  ],
+  "bugs": {
+    "url": "https://github.com/thoughtspile/banditstash/issues"
+  },
+  "homepage": "https://github.com/thoughtspile/banditstash#readme",
+  "devDependencies": {
+    "c8": "^7.13.0",
+    "prettier": "^2.8.4",
+    "terser": "^5.16.4",
+    "typescript": "^4.9.5",
+    "uvu": "^0.5.6"
+  }
+}
