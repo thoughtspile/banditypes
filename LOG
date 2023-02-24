@@ -1,0 +1,33 @@
+Base: 1282 / 485
+
+ES6: 855 / 462, lots of function() repetition
+
+Implement literalUnion via includes: 837 / 447
+
+Remove literal in favor of literalUnion([item]) : 809 / 431
+
+Remove null / undefined in favor of literalUnion([null]): 783 / 428
+
+!Remove string / number / boolean in favor of primitive(tag): 751 / 440
+!inlining effect
+
+remove anyObject typeof: 744 / 435
+
+loose object with runtime error on access: 713 / 422
+
+Array.isArray -> instance(Array): 688 / 408
+
+!check mode: 707 / 421
+!banditype -> unknown().and
+
+remove never — use plain fail(): 685 / 407
+
+function -> const for primitive: 658 / 397
+
+spread banditstash: 642 / 394
+
+instance-based primitives: 612 / 374
+
+throw new TypeError(message || 'BandiType error') -> null[message || 'BandiType error']: 595 / 364
+
+const -> var: 583 / 361
