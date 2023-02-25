@@ -2,33 +2,34 @@ export type Cast<T, Source = unknown> = (
   data: Source,
   key?: string | number
 ) => T;
-export interface Banditype<T> extends Cast<T> {
-  and<Extra = T>(cast: Cast<Extra, T>): Banditype<Extra>;
-  or<Extra>(cast: Cast<Extra>): Banditype<T | Extra>;
-}
 export type Infer<Schema extends Cast<unknown>> = ReturnType<Schema>;
 
-// factory
-export var banditype = <T>(cast: Cast<T>) => {
-  var base = ((raw) => cast(raw)) as Banditype<T>;
-  (base.and = (extra) => banditype((raw) => extra(cast(raw)))),
-    (base.or = (extra) =>
-      banditype((raw) => {
-        try {
-          return cast(raw);
-        } catch (err) {
-          return extra(raw);
-        }
-      }));
-  return base;
+// Core
+export const banditype = <T>(cast: Cast<T>) => cast;
+export const and = <T, Extra = T>(cast: Cast<T>, extra: Cast<Extra, T>): Cast<Extra> => raw => extra(cast(raw));
+export const or = <T, Extra>(cast: Cast<T>, extra: Cast<Extra>): Cast<T | Extra> => (raw) => {
+  try {
+    return cast(raw);
+  } catch (err) {
+    return extra(raw);
+  }
 };
 
-// error helper
-export var never = (message?: string): never =>
-  (null as any)[message || "Banditype error"] as never;
+// Error helper
+export const never = (message?: string) => (null as any)[message || "Banditype error"] as never;
 
-// safe validation helper
-export var is = <T>(value: unknown, schema: Banditype<T>): value is T => {
+// Chainable API
+export interface Chain<T> extends Cast<T> {
+  and: <E>(extra: Cast<E, T>) => Chain<E>;
+  or: <E>(extra: Cast<E>) => Chain<E | T>;
+}
+export const chain = <T>(cast: Cast<T>): Chain<T> => Object.assign(cast, {
+  and: extra => chain(and(cast, extra)),
+  or: extra => chain(or(cast, extra)),
+} as Chain<T>);
+
+// Safe validation helper
+export var is = <T>(value: unknown, schema: Cast<T>): value is T => {
   try {
     schema(value);
     return true;
@@ -38,67 +39,77 @@ export var is = <T>(value: unknown, schema: Banditype<T>): value is T => {
 };
 
 // literals
-export var literalUnion = <T>(items: readonly T[]) =>
+export var literal = <T>(items: readonly T[]) =>
   banditype((raw) => (items.includes(raw as T) ? (raw as T) : never()));
 
+// Basic types
+type Func = (...args: unknown[]) => unknown;
 interface Like {
-  (tag: string): Banditype<string>;
-  (tag: number): Banditype<number>;
-  (tag: boolean): Banditype<boolean>;
-  (tag: bigint): Banditype<bigint>;
-  (tag: () => void): Banditype<(...args: unknown[]) => unknown>;
-  (tag: symbol): Banditype<symbol>;
-  (tag: undefined): Banditype<undefined>;
+  (tag: string): Cast<string>;
+  (tag: number): Cast<number>;
+  (tag: boolean): Cast<boolean>;
+  (tag: bigint): Cast<bigint>;
+  (tag: Func): Cast<Func>;
+  (tag: symbol): Cast<symbol>;
+  (tag: undefined): Cast<undefined>;
 }
 export var like = ((tag: unknown) =>
   banditype((raw) => (typeof raw === typeof tag ? raw : never()))) as Like;
+export var string = () => like('');
+export var number = () => like(0);
+export var boolean = () => like(true);
+
+// Classes
+export var instance = <T>(proto: new () => T) =>
+  banditype((raw) => (raw instanceof proto ? (raw as T) : never()));
 
 // objects
 export var record = <Item>(
   castValue: Cast<Item>
-): Banditype<Record<string, Item>> =>
-  banditype((raw: any) => {
+): Cast<Record<string, Item>> =>
+  and(instance(Object), (raw: any) => {
     var res: Record<string, Item> = {};
     for (var key in raw) {
       res[key] = castValue(raw[key], key);
     }
     return res;
   });
-export var object = <T extends Record<string, Cast<unknown>>>(schema: T) =>
-  record((raw: any, key: any) => schema[key]!(raw)) as Banditype<{
-    [K in keyof T]: Infer<T[K]>;
-  }>;
+export var object = <T extends Record<string, unknown>>(schema: {
+  [K in keyof T]: Cast<T[K]>;
+}) => 
+  and(instance(Object), (raw: any) => {
+    var res = {} as T;
+    for (var key in schema) {
+      res[key] = schema[key](raw[key], key);
+    }
+    return res;
+  });
 
 // arrays
 export var array = <Item>(castItem: Cast<Item>) =>
-  instance(Array).and((arr) => arr.map(castItem));
+  and(instance(Array), (arr) => arr.map(castItem));
 export var tuple = <T extends readonly Cast<unknown>[]>(schema: T) =>
-  instance(Array).and((arr) => {
+  and(instance(Array), (arr) => {
     return schema.map((cast, i) => cast(arr[i])) as {
       -readonly [K in keyof T]: Infer<T[K]>;
     };
   });
 
-// classes
-export var instance = <T>(proto: new () => T) =>
-  banditype((raw) => (raw instanceof proto ? (raw as T) : never()));
 export var set = <T>(castItem: Cast<T>) =>
-  instance(Set).and((set) => {
-    return new Set<T>([...set].map(castItem));
-  });
+  and(instance(Set), (set) => new Set<T>([...set].map(castItem)));
 export var map = <K, V>(castKey: Cast<K>, castValue: Cast<V>) =>
-  instance(Map).and((map) => {
+  and(instance(Map), (map) => {
     return new Map<K, V>([...map].map(([k, v]) => [castKey(k), castValue(v)]));
   });
 
 // export var m = object({
-//   tags: array(like('')).and(t => t.length > 0),
+//   tags: array(like('')).and(t => t.length > 0 ? t : never()),
 //   coord: tuple([like(0), like(0)] as const),
 //   created: instance(Date),
 //   active: like(true),
 //   close: like(()=>{}),
-//   country: literalUnion(['EU', 'US'] as const).or(literalUnion([null])),
-//   tag: literalUnion(['HELLO'] as const).or(literalUnion([undefined])),
+//   country: literal('EU' as const, 'US' as const).or(literal(null)),
+//   tag: literal('HELLO' as const).or(literal(undefined)),
 //   boo: set(like('')),
 //   foo: map(like(''), like(true)),
 //   extras: raw => raw,
@@ -106,19 +117,24 @@ export var map = <K, V>(castKey: Cast<K>, castValue: Cast<V>) =>
 // });
 
 // export var p = [
-//   like(''),
-//   like(0),
-//   like(true),
+//   // like(''),
+//   // like(0),
+//   // like(true),
+//   string,
+//   number,
+//   boolean,
 //   like(()=>{}),
 //   instance(Date),
 //   record(like(0)),
 //   object,
 //   array,
 //   tuple,
-//   literalUnion,
-//   literalUnion([null] as const),
+//   literal,
+//   literal([null] as const),
 //   like(undefined),
-//   raw => raw,
+//   or,
+//   map,
+//   set,
 // ];
 
-// export var x = [literalUnion, like, instance, array, object, tuple, record, set, map];
+// export var x = [literal, string, number, boolean, instance, array, object, tuple, record, set, map, or];

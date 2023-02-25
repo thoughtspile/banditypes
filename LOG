@@ -24,7 +24,8 @@ remove never — use plain fail(): 685 / 407
 
 function -> const for primitive: 658 / 397
 
-spread banditstash: 642 / 394
+!spread banditype: 642 / 394
+!not cloning function in banditype
 
 instance-based primitives: 612 / 374
 
@@ -42,4 +43,4 @@ const -> var: 583 / 361
   - uses optional chaining
   - -26 from baseline / -18 from obscure error
   - nullable items, fixing restores size
-!not cloning function in banditype
+!spread literal arg
