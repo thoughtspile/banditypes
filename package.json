@@ -1,7 +1,7 @@
 {
-  "name": "banditstash",
+  "name": "banditypes",
   "version": "0.1.0",
-  "description": "Type-safe wrapper for localStorage / sessionStorage",
+  "description": "The might 400-byte schema validator",
   "author": "Vladimir Klepov v.klepov@gmail.com",
   "license": "MIT",
   "type": "module",
@@ -23,16 +23,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thoughtspile/banditstash.git"
+    "url": "git+https://github.com/thoughtspile/banditypes.git"
   },
   "keywords": [
     "typescript",
+    "superstruct",
+    "schema",
+    "validation",
     "zod"
   ],
   "bugs": {
-    "url": "https://github.com/thoughtspile/banditstash/issues"
+    "url": "https://github.com/thoughtspile/banditypes/issues"
   },
-  "homepage": "https://github.com/thoughtspile/banditstash#readme",
+  "homepage": "https://github.com/thoughtspile/banditypes#readme",
   "devDependencies": {
     "@types/node": "^18.14.1",
     "c8": "^7.13.0",
