@@ -1,7 +1,6 @@
-import isEmail from 'is-email'
-import { string, refine } from '../../../src'
+import { string, fail } from '../../../src/index.js'
 
-export const Struct = refine(string(), 'email', isEmail)
+export const Struct = string().pipe(x => x === data ? x : fail())
 
 export const data = 'name@example.com'
 

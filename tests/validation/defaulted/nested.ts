@@ -1,7 +1,7 @@
-import { defaulted, string, object } from '../../../src'
+import { string, object } from '../../../src/index.js'
 
 export const Struct = object({
-  title: defaulted(string(), 'Untitled'),
+  title: string().or(() => 'Untitled'),
 })
 
 export const data = {}

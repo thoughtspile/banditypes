@@ -1,6 +1,6 @@
-import { number, defaulted } from '../../../src'
+import { number } from '../../../src/index.js'
 
-export const Struct = defaulted(number(), () => 42)
+export const Struct = number().or(() => 42)
 
 export const data = undefined
 

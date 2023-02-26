@@ -1,7 +1,7 @@
-import { type, string, number, nullable } from '../../../src'
+import { objectLoose, string, number, nullable } from '../../../src/index.js'
 
-export const Struct = type({
-  name: nullable(string()),
+export const Struct = objectLoose({
+  name: string().or(nullable()),
   age: number(),
 })
 

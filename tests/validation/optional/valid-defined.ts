@@ -1,6 +1,6 @@
-import { number, optional } from '../../../src'
+import { number, optional } from '../../../src/index.js'
 
-export const Struct = optional(number())
+export const Struct = number().or(optional())
 
 export const data = 42
 

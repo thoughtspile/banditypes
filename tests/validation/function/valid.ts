@@ -1,4 +1,4 @@
-import { func } from '../../../src'
+import { func } from '../../../src/index.js'
 
 export const Struct = func()
 

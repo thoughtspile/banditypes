@@ -1,4 +1,4 @@
-import { tuple, string, number } from '../../../src'
+import { tuple, string, number } from '../../../src/index.js'
 
 export const Struct = tuple([string(), number()])
 

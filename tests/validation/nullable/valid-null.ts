@@ -1,6 +1,6 @@
-import { number, nullable } from '../../../src'
+import { number, nullable } from '../../../src/index.js'
 
-export const Struct = nullable(number())
+export const Struct = number().or(nullable())
 
 export const data = null
 

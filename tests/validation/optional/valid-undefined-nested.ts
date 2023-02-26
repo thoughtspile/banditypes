@@ -1,7 +1,7 @@
-import { type, string, number, optional } from '../../../src'
+import { objectLoose, string, number, optional } from '../../../src/index.js'
 
-export const Struct = type({
-  name: optional(string()),
+export const Struct = objectLoose({
+  name: string().or(optional()),
   age: number(),
 })
 

@@ -1,10 +1,6 @@
-import { number, refine } from '../../../src'
+import { fail, number } from '../../../src/index.js'
 
-export const Struct = refine(
-  number(),
-  'positive',
-  (v) => v > 0 || 'Number was not positive!'
-)
+export const Struct = number().pipe((v) => v > 0 ? v : fail('Number was not positive!'))
 
 export const data = -1
 

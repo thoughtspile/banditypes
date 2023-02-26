@@ -1,6 +1,6 @@
-import { map } from '../../../src'
+import { map, unknown } from '../../../src/index.js'
 
-export const Struct = map()
+export const Struct = map(unknown(), unknown())
 
 export const data = 'invalid'
 

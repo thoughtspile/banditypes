@@ -1,4 +1,4 @@
-import { never } from '../../../src'
+import { never } from '../../../src/index.js'
 
 export const Struct = never()
 

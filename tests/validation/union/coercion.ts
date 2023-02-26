@@ -1,9 +1,9 @@
-import { union, string, number, defaulted } from '../../../src'
+import { string, number } from '../../../src/index.js'
 
-const A = defaulted(string(), 'foo')
+const A = string().or(() => 'foo')
 const B = number()
 
-export const Struct = union([A, B])
+export const Struct = A.or(B)
 
 export const data = undefined
 

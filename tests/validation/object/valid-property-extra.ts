@@ -8,6 +8,7 @@ export const Struct = object({
 export const data = {
   name: 'john',
   age: 42,
+  unknown: true,
 }
 
 export const output = {

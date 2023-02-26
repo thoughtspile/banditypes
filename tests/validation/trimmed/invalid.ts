@@ -1,6 +1,6 @@
-import { string, trimmed } from '../../../src'
+import { string } from '../../../src/index.js'
 
-export const Struct = trimmed(string())
+export const Struct = string().pipe(s => s.trim())
 
 export const data = false
 

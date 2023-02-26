@@ -1,6 +1,6 @@
-import { string, unknown, coerce } from '../../../src'
+import { unknown } from '../../../src/index.js'
 
-export const Struct = coerce(string(), unknown(), (x) =>
+export const Struct = unknown().pipe((x) =>
   x == null ? 'unknown' : x
 )
 

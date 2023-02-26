@@ -1,6 +1,6 @@
-import { lazy, nonempty, string } from '../../../src'
+import { lazy, fail, string } from '../../../src/index.js'
 
-export const Struct = lazy(() => nonempty(string()))
+export const Struct = lazy(() => string().pipe(s => s.length > 0 ? s : fail()))
 
 export const data = ''
 

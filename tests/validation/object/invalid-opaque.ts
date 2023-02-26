@@ -1,6 +1,6 @@
-import { object } from '../../../src'
+import { object } from '../../../src/index.js'
 
-export const Struct = object()
+export const Struct = object({})
 
 export const data = 'invalid'
 

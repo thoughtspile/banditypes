@@ -1,5 +1,7 @@
 {
+  "compilerOptions": {
+    "module": "esnext"
+  },
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"],
-  "exclude": ["./api", "./validation"]
+  "include": ["./**/*.ts"]
 }

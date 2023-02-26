@@ -1,6 +1,6 @@
-import { array } from '../../../src'
+import { array, unknown } from '../../../src/index.js'
 
-export const Struct = array()
+export const Struct = array(unknown())
 
 export const data = 'invalid'
 

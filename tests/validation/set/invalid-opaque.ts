@@ -1,6 +1,6 @@
-import { set } from '../../../src'
+import { set, unknown } from '../../../src/index.js'
 
-export const Struct = set()
+export const Struct = set(unknown())
 
 export const data = 'invalid'
 

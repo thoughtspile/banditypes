@@ -1,4 +1,4 @@
-import { enums } from '../../../src'
+import { enums } from '../../../src/index.js'
 
 export const Struct = enums(['one', 'two'])
 

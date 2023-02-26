@@ -1,7 +1,7 @@
 import {
   string, number, boolean, func,
   instance, 
-  array, object, type, tuple, record, set, map, 
+  array, object, objectLoose, tuple, record, set, map, 
   nullable, optional, 
   enums, 
   unknown,
@@ -18,7 +18,7 @@ const schema = object<Data>({
   optionalLiteral: enums(['HELLO']).or(optional()),
   set: set(string()),
   map: map(string(), boolean()),
-  extras: type({
+  extras: objectLoose({
     form: record(unknown())
   }),
 });

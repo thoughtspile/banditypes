@@ -1,6 +1,6 @@
-import { literal } from '../../../src'
+import { enums } from '../../../src/index.js'
 
-export const Struct = literal(42)
+export const Struct = enums([42])
 
 export const data = 42
 

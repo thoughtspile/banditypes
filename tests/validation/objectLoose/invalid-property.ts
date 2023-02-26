@@ -1,15 +1,13 @@
-import { object, string, number } from '../../../src/index.js'
+import { objectLoose, string, number } from '../../../src/index.js'
 
-export const Struct = object({
+export const Struct = objectLoose({
   name: string(),
   age: number(),
-  height: string(),
 })
 
 export const data = {
   name: 'john',
   age: 'invalid',
-  height: 2,
 }
 
 export const failures = [
@@ -19,12 +17,5 @@ export const failures = [
     refinement: undefined,
     path: ['age'],
     branch: [data, data.age],
-  },
-  {
-    value: 2,
-    type: 'string',
-    refinement: undefined,
-    path: ['height'],
-    branch: [data, data.height],
   },
 ]

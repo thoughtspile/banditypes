@@ -1,9 +1,9 @@
-import { type, union, string, number } from '../../../src'
+import { objectLoose, string, number } from '../../../src/index.js'
 
-const A = type({ a: string() })
-const B = type({ b: number() })
+const A = objectLoose({ a: string() })
+const B = objectLoose({ b: number() })
 
-export const Struct = union([A, B])
+export const Struct = A.or(B)
 
 export const data = {
   b: 'invalid',

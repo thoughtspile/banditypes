@@ -14,15 +14,12 @@
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test": "tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
-    "test:coverage": "c8 --100 npm test",
+    "test": "rm -rf dist/tests && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
+    "test:coverage": "c8 --100 --exclude dist/tests npm test",
     "format": "prettier --write --loglevel silent src",
     "verify": "npm run format && npm run test:coverage",
-    "terser": "npx npx terser dist/index.js -m -c --toplevel > dist/index.min.js",
-    "size:raw": "cat dist/index.min.js | wc -c",
-    "size:gz": "cat dist/index.min.js | gzip -c | wc -c",
     "size": "node bench/run",
-    "build": "tsc"
+    "build": "rm -rf dist && tsc"
   },
   "repository": {
     "type": "git",
