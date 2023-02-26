@@ -3,82 +3,85 @@ export type Cast<T, Source = unknown> = (
   key?: string | number
 ) => T;
 export type Infer<Schema extends Cast<unknown>> = ReturnType<Schema>;
+// Chainable API
+export interface Banditype<T> extends Cast<T> {
+  pipe: <E>(extra: Cast<E, T>) => Banditype<E>;
+  or: <E>(extra: Cast<E>) => Banditype<E | T>;
+}
 
 // Core
-export const banditype = <T>(cast: Cast<T>) => cast;
-export const and = <T, Extra = T>(cast: Cast<T>, extra: Cast<Extra, T>): Cast<Extra> => raw => extra(cast(raw));
-export const or = <T, Extra>(cast: Cast<T>, extra: Cast<Extra>): Cast<T | Extra> => (raw) => {
-  try {
-    return cast(raw);
-  } catch (err) {
-    return extra(raw);
-  }
-};
+export var banditype = <T>(cast: Cast<T>): Banditype<T> => Object.assign(cast, {
+  pipe: extra => banditype(raw => extra(cast(raw))),
+  or: extra => banditype((raw) => {
+    try {
+      return cast(raw);
+    } catch (err) {
+      return extra(raw);
+    }
+  }),
+} as Banditype<T>);
 
 // Error helper
-export const never = (message?: string) => (null as any)[message || "Banditype error"] as never;
+export var never = (_val?: unknown, message?: string) => (null as any)[message || "Banditype error"] as never;
 
-// Chainable API
-export interface Chain<T> extends Cast<T> {
-  and: <E>(extra: Cast<E, T>) => Chain<E>;
-  or: <E>(extra: Cast<E>) => Chain<E | T>;
-}
-export const chain = <T>(cast: Cast<T>): Chain<T> => Object.assign(cast, {
-  and: extra => chain(and(cast, extra)),
-  or: extra => chain(or(cast, extra)),
-} as Chain<T>);
-
-// Safe validation helper
-export var is = <T>(value: unknown, schema: Cast<T>): value is T => {
-  try {
-    schema(value);
-    return true;
-  } catch (err) {
-    return false;
-  }
-};
+export var unknown = () => banditype(raw => raw);
 
 // literals
-export var literal = <T>(items: readonly T[]) =>
-  banditype((raw) => (items.includes(raw as T) ? (raw as T) : never()));
+// not sure why, but this signature prevents wideing [90] -> number[]
+type Primitive = string | number | null | undefined | boolean | symbol | object;
+export var enums = <U extends Primitive, T extends readonly U[]>(items: T) =>
+  banditype((raw) => (items.includes(raw as T[number]) ? (raw as T[number]) : never()));
 
 // Basic types
 type Func = (...args: unknown[]) => unknown;
-interface Like {
-  (tag: string): Cast<string>;
-  (tag: number): Cast<number>;
-  (tag: boolean): Cast<boolean>;
-  (tag: bigint): Cast<bigint>;
-  (tag: Func): Cast<Func>;
-  (tag: symbol): Cast<symbol>;
-  (tag: undefined): Cast<undefined>;
+export interface Like {
+  (tag: string): Banditype<string>;
+  (tag: number): Banditype<number>;
+  (tag: boolean): Banditype<boolean>;
+  (tag: bigint): Banditype<bigint>;
+  (tag: Func): Banditype<Func>;
+  (tag: symbol): Banditype<symbol>;
+  (): Banditype<undefined>;
 }
 export var like = ((tag: unknown) =>
   banditype((raw) => (typeof raw === typeof tag ? raw : never()))) as Like;
 export var string = () => like('');
 export var number = () => like(0);
 export var boolean = () => like(true);
+export var func = () => like(never);
+export var optional = () => like();
+export var nullable = () => banditype(v => v === null ? v : never());
 
 // Classes
-export var instance = <T>(proto: new () => T) =>
+export var instance = <T>(proto: new (...args: unknown[]) => T) =>
   banditype((raw) => (raw instanceof proto ? (raw as T) : never()));
 
 // objects
 export var record = <Item>(
   castValue: Cast<Item>
-): Cast<Record<string, Item>> =>
-  and(instance(Object), (raw: any) => {
+): Banditype<Record<string, Item>> =>
+  instance(Object).pipe((raw: any) => {
     var res: Record<string, Item> = {};
     for (var key in raw) {
       res[key] = castValue(raw[key], key);
     }
     return res;
   });
-export var object = <T extends Record<string, unknown>>(schema: {
+export var object = <T = Record<string, never>>(schema: {
   [K in keyof T]: Cast<T[K]>;
 }) => 
-  and(instance(Object), (raw: any) => {
+  instance(Object).pipe<T>((raw: any) => {
     var res = {} as T;
+    for (var key in schema) {
+      res[key] = schema[key](raw[key], key);
+    }
+    return res;
+  });
+export var type = <T extends Record<string, unknown> = Record<string, never>>(schema: {
+  [K in keyof T]: Cast<T[K]>;
+}) => 
+  instance(Object).pipe<T>((raw: any) => {
+    var res = {...raw} as T;
     for (var key in schema) {
       res[key] = schema[key](raw[key], key);
     }
@@ -87,20 +90,22 @@ export var object = <T extends Record<string, unknown>>(schema: {
 
 // arrays
 export var array = <Item>(castItem: Cast<Item>) =>
-  and(instance(Array), (arr) => arr.map(castItem));
+  instance(Array).pipe((arr) => arr.map(castItem));
 export var tuple = <T extends readonly Cast<unknown>[]>(schema: T) =>
-  and(instance(Array), (arr) => {
+  instance(Array).pipe((arr) => {
     return schema.map((cast, i) => cast(arr[i])) as {
       -readonly [K in keyof T]: Infer<T[K]>;
     };
   });
 
 export var set = <T>(castItem: Cast<T>) =>
-  and(instance(Set), (set) => new Set<T>([...set].map(castItem)));
+  instance(Set).pipe((set) => new Set<T>([...set].map(castItem)));
 export var map = <K, V>(castKey: Cast<K>, castValue: Cast<V>) =>
-  and(instance(Map), (map) => {
+  instance(Map).pipe((map) => {
     return new Map<K, V>([...map].map(([k, v]) => [castKey(k), castValue(v)]));
   });
+
+export var lazy = <T>(cast: () => Cast<T>) => banditype(raw => cast()(raw));
 
 // export var m = object({
 //   tags: array(like('')).and(t => t.length > 0 ? t : never()),
@@ -137,4 +142,4 @@ export var map = <K, V>(castKey: Cast<K>, castValue: Cast<V>) =>
 //   set,
 // ];
 
-// export var x = [literal, string, number, boolean, instance, array, object, tuple, record, set, map, or];
+// export var x = [banditype, string, number, boolean, instance, array, object, tuple, record, set, map, lazy, nullable, optional, enums, unknown];

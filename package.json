@@ -14,7 +14,7 @@
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test": "npm run build && uvu dist/tests '.test.js$'",
+    "test": "tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
     "test:coverage": "c8 --100 npm test",
     "format": "prettier --write --loglevel silent src",
     "verify": "npm run format && npm run test:coverage",
@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/thoughtspile/banditstash#readme",
   "devDependencies": {
+    "@types/node": "^18.14.1",
     "c8": "^7.13.0",
     "prettier": "^2.8.4",
     "terser": "^5.16.4",

@@ -44,3 +44,7 @@ const -> var: 583 / 361
   - -26 from baseline / -18 from obscure error
   - nullable items, fixing restores size
 !spread literal arg
+
+Important:
+- chain depth increases DCE passes
+- signature compatibility increases gzip ratio
