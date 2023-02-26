@@ -21,7 +21,7 @@
     "terser": "npx npx terser dist/index.js -m -c --toplevel > dist/index.min.js",
     "size:raw": "cat dist/index.min.js | wc -c",
     "size:gz": "cat dist/index.min.js | gzip -c | wc -c",
-    "size": "npm run terser && npm run size:raw && npm run size:gz",
+    "size": "node bench/run",
     "build": "tsc"
   },
   "repository": {
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@types/node": "^18.14.1",
     "c8": "^7.13.0",
+    "esbuild": "^0.17.10",
     "prettier": "^2.8.4",
     "terser": "^5.16.4",
     "typescript": "^4.9.5",

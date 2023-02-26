@@ -2,11 +2,10 @@ import {
   string, number, boolean, func,
   instance, 
   array, object, type, tuple, record, set, map, 
-  lazy, nullable, optional, 
+  nullable, optional, 
   enums, 
   unknown,
-  type Infer
-} from '../src';
+} from '../../src';
 import { sample, type Data } from './sample';
 
 const schema = object<Data>({
@@ -22,9 +21,10 @@ const schema = object<Data>({
   extras: type({
     form: record(unknown())
   }),
-  // children: lazy(() => schema)
 });
 
-const sample: Infer<typeof schema> = {
-
-};
+try {
+  console.log(schema(sample as any));
+} catch (err) {
+  console.log('fail');
+}
