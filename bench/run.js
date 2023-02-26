@@ -45,15 +45,17 @@ function diff(baseline, checked) {
 async function runSuite(dir) {
   await mkdir(`${__dirname}/dist/${dir}`).catch(() => {});
   const baseline = await buildSuite(`${dir}/raw`);
-  const checked = await buildSuite(`${dir}/checked`);
-  console.log(
-    `\n${dir}\n---`,
-    '\nbaseline', baseline,
-    '\nchecked', checked,
-    '\ndiff', diff(baseline, checked)
-  );
+  console.log(`\n${dir}\n---`);
+  console.log('\nbaseline', baseline);
+
+  for (const suite of ['zod', 'superstruct', 'typed', 'checked']) {
+    const stats = await buildSuite(`${dir}/${suite}`);
+    console.log(`suite\n  `, stats);
+    console.log(`${suite}:diff\n  `, diff(baseline, stats));
+  }
 }
 
 await mkdir(`${__dirname}/dist`).catch(() => {});
 runSuite('full');
-runSuite('core');
+runSuite('basic');
+runSuite('minimal');
