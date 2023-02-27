@@ -1,6 +1,6 @@
 import { string, fail } from '../../../src/index.js'
 
-export const Struct = string().pipe(() => fail());
+export const Struct = string().map(() => fail());
 
 export const data = 'invalid'
 

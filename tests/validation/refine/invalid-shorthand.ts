@@ -1,6 +1,6 @@
 import { fail, number } from '../../../src/index.js'
 
-export const Struct = number().pipe((v) => v > 0 ? v : fail('Number was not positive!'))
+export const Struct = number().map((v) => v > 0 ? v : fail())
 
 export const data = -1
 

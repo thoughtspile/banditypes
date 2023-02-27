@@ -1,6 +1,6 @@
 import { unknown } from '../../../src/index.js'
 
-export const Struct = unknown().pipe((x) =>
+export const Struct = unknown().map((x) =>
   x == null ? 'unknown' : x
 )
 

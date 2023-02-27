@@ -1,6 +1,6 @@
 import { number } from '../../../src/index.js'
 
-export const Struct = number().pipe(() => 'known')
+export const Struct = number().map(() => 'known')
 
 export const data = false
 

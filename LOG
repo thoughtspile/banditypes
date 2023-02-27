@@ -48,3 +48,9 @@ const -> var: 583 / 361
 Important:
 - chain depth increases DCE passes
 - signature compatibility increases gzip ratio
+
+
+---
+chain pipe / or:      108/216/399
+functional pipe / or: 51 /203/382
+curried pipe / or:    51 /201/381

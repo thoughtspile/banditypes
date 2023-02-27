@@ -1,17 +1,17 @@
 import { string, object, fail } from '../../../src/index.js'
 
-const PasswordValidator = string().pipe((pw) =>
-  pw.length >= 8 ? pw : fail('required minimum length of 8')
+const PasswordValidator = string().map((pw) =>
+  pw.length >= 8 ? pw : fail()
 )
 const changePasswordStruct = object({
   newPassword: PasswordValidator,
   confirmPassword: string(),
 })
 
-export const Struct = changePasswordStruct.pipe((values) => {
+export const Struct = changePasswordStruct.map((values) => {
   return values.newPassword === values.confirmPassword
     ? values
-    : fail('Passwords do not match')
+    : fail()
 })
 
 export const data = {

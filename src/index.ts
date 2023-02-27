@@ -1,17 +1,14 @@
-export type Cast<T, Source = unknown> = (
-  data: Source,
-  key?: string | number
-) => T;
+export type Cast<T, Source = unknown> = (data: Source) => T;
 export type Infer<Schema extends Cast<unknown>> = ReturnType<Schema>;
 // Chainable API
 export interface Banditype<T> extends Cast<T> {
-  pipe: <E>(extra: Cast<E, T>) => Banditype<E>;
+  map: <E>(extra: Cast<E, T>) => Banditype<E>;
   or: <E>(extra: Cast<E>) => Banditype<E | T>;
 }
 
 // Core
 export const banditype = <T>(cast: Cast<T>): Banditype<T> => {
-  (cast as Banditype<T>).pipe = (extra) => banditype((raw) => extra(cast(raw)));
+  (cast as Banditype<T>).map = (extra) => banditype((raw) => extra(cast(raw)));
   (cast as Banditype<T>).or = (extra) =>
     banditype((raw) => {
       try {
@@ -24,8 +21,7 @@ export const banditype = <T>(cast: Cast<T>): Banditype<T> => {
 };
 
 // Error helper
-export const fail = (message?: string) =>
-  (null as any)[message || "Banditype error"] as never;
+export const fail = () => ("bad banditype" as any)() as never;
 
 export const never = () => banditype(() => fail());
 export const unknown = () => banditype((raw) => raw);
@@ -56,7 +52,7 @@ export const number = () => like(0);
 export const boolean = () => like(true);
 export const func = () => like(fail);
 export const optional = () => like();
-export const nullable = () => banditype((v) => (v === null ? v : fail()));
+export const nullable = () => banditype((raw) => (raw === null ? raw : fail()));
 
 // Classes
 export const instance = <T>(proto: new (...args: unknown[]) => T) =>
@@ -66,52 +62,53 @@ export const instance = <T>(proto: new (...args: unknown[]) => T) =>
 export const record = <Item>(
   castValue: Cast<Item>
 ): Banditype<Record<string, Item>> =>
-  instance(Object).pipe((raw: any) => {
+  instance(Object).map((raw: any) => {
     const res: Record<string, Item> = {};
     for (const key in raw) {
-      res[key] = castValue(raw[key], key);
+      const f = castValue(raw[key]);
+      f !== undefined && (res[key] = f);
     }
     return res;
   });
 export const object = <T = Record<string, never>>(schema: {
   [K in keyof T]: Cast<T[K]>;
 }) =>
-  instance(Object).pipe<T>((raw: any) => {
+  instance(Object).map((raw: any) => {
     const res = {} as T;
     for (const key in schema) {
       const f = schema[key](raw[key]);
       f !== undefined && (res[key] = f);
     }
-    return res;
+    return res as T;
   });
 export const objectLoose = <
   T extends Record<string, unknown> = Record<string, never>
 >(schema: {
   [K in keyof T]: Cast<T[K]>;
 }) =>
-  instance(Object).pipe<T>((raw: any) => {
+  instance(Object).map((raw: any) => {
     const res = { ...raw };
     for (const key in schema) {
       const f = schema[key](raw[key]);
       f !== undefined && (res[key] = f);
     }
-    return res;
+    return res as T;
   });
 
 // arrays
 export const array = <Item>(castItem: Cast<Item>) =>
-  instance(Array).pipe((arr) => arr.map(castItem));
+  instance(Array).map((arr) => arr.map(castItem));
 export const tuple = <T extends readonly Cast<unknown>[]>(schema: T) =>
-  instance(Array).pipe((arr) => {
+  instance(Array).map((arr) => {
     return schema.map((cast, i) => cast(arr[i])) as {
       -readonly [K in keyof T]: Infer<T[K]>;
     };
   });
 
 export const set = <T>(castItem: Cast<T>) =>
-  instance(Set).pipe((set) => new Set<T>([...set].map(castItem)));
+  instance(Set).map((set) => new Set<T>([...set].map(castItem)));
 export const map = <K, V>(castKey: Cast<K>, castValue: Cast<V>) =>
-  instance(Map).pipe((map) => {
+  instance(Map).map((map) => {
     return new Map<K, V>([...map].map(([k, v]) => [castKey(k), castValue(v)]));
   });
 
