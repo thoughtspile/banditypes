@@ -1,6 +1,6 @@
 {
   "name": "banditypes",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The might 400-byte schema validator",
   "author": "Vladimir Klepov v.klepov@gmail.com",
   "license": "MIT",
