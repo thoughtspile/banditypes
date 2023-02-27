@@ -8,7 +8,7 @@ Check if data conforms to a TS type at runtime — much like [zod,](https://zod.
 - Supports _both_ deriving TS types from schema _and_ declaring a schema for an existing TS type.
 - User-defined types, refinements, and conversions.
 
-Banditstash is a 400-byte lib, tradeoffs have been made:
+Banditypes is a 400-byte lib, tradeoffs have been made:
 
 - _No_ detailed errors with messages and paths, just a throw in a predictable location.
 - _No_ built-in refinements (empty, integer, etc.).
