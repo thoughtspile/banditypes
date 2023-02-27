@@ -31,6 +31,7 @@ const parseGunslinger = object({
   }),
 })
 
+// Explicit inference
 type Gunslinger = Infer<typeof parseGunslinger>;
 
 const raw = JSON.parse(`{
@@ -43,7 +44,9 @@ const raw = JSON.parse(`{
   }
 }`)
 try {
-  const data = Gunslinger(raw)
+  const data = parseGunslinger(raw)
+  // fully type-safe access
+  console.log(`${data.name} from ${data.born.state} is out to kill ya`);
 } catch (err) {
   console.log('invalid JSON')
 }
@@ -76,6 +79,10 @@ unknown()
 
 // instanceof check
 instance(MyClass)
+
+// checks if value is a function
+// static input / output validation is not possible in JS
+func()
 
 // { key: string; nullable: string | null; maybe?: string }
 object({
