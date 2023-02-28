@@ -9,8 +9,10 @@
   "module": "./dist/index.js",
   "main": "./dist/cjs/index.js",
   "exports": {
-    ".": "./dist/index.js",
-    "./cjs": "./dist/cjs/index.js"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    }
   },
   "types": "./dist/index.d.ts",
   "engines": {
