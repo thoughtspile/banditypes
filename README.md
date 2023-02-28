@@ -3,10 +3,11 @@
 Check if data conforms to a TS type at runtime — much like [zod,](https://zod.dev/) [yup](https://github.com/jquense/yup) or [superstruct](https://docs.superstructjs.org/), but in a tiny 400-byte package. Despite the small size, it's not a toy:
 
 - Passes the relevant superstruct test suite.
-- Rich built-in types: maps, sets, tuples, literals, and generic union types.
+- Rich built-in types: [maps, sets, tuples, literals,](#types) and generic [union types.](#or)
 - Mostly API-compatible with the established libraries.
-- Supports _both_ deriving TS types from schema _and_ declaring a schema for an existing TS type.
-- User-defined types, refinements, and conversions.
+- Supports _both_ deriving TS types from schema _and_ [declaring a schema for an existing TS type.](#ts-first-schemas)
+- User-defined [types,](#cast-functions) [refinements, and conversions.](#map)
+- Decent performance — among the top libraries not using code generation.
 
 Banditypes is a 400-byte lib, tradeoffs have been made:
 
@@ -15,6 +16,8 @@ Banditypes is a 400-byte lib, tradeoffs have been made:
 - Compiled to ES2017: uses ...spreads and arrows. Can be transpiled further down.
 - Validation and conversion are mangled, so you have to use the returned object. "Pure validation" is impossible.
 - Some syntax might be a bit odd.
+
+> Small size is the primary focus of banditypes. It's the smallest validation library, AFAIK, and I'll do my best to keep the core under 400 bytes (unless some critical bugs need fixing, in which case it might go slightly above that).
 
 This is not a library for everybody, but it gets the job done, and it's small. Here's a usage example:
 
@@ -55,6 +58,19 @@ try {
 400 bytes is an _approximate_ gzip bundle increase from using _all_ built-in validations. It may vary based on the minifier and the amount of validations used. A typical usage (primitives + object + array) is closer to 200 bytes, the core is around 100. Find out more about the [measurement technique.](#size-measurement)
 
 If you like banditypes, check out [banditstash](https://github.com/thoughtspile/banditstash) — a tiny localStorage wrapper with runtime validation, fully configurable using plugins.
+
+## Table of contents
+
+- [Install](#install)
+- [Types](#types)
+- [Operators](#operators)
+  - [or](#or)
+  - [map](#map)
+- [Cast functions](#cast-functions)
+- [TS-first schemas](#ts-first-schemas)
+- [Size measurement](#size-measurement)
+- [Acknowledgements](#acknowledgements)
+- [License (it's MIT)](#license)
 
 ## Install
 
