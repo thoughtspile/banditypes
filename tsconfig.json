@@ -5,7 +5,6 @@
 		"moduleResolution": "node",
 		"target": "ES2018",
 		"importsNotUsedAsValues": "error",
-		"preserveValueImports": true,
 		"isolatedModules": true,
 		"forceConsistentCasingInFileNames": true,
 		"strictNullChecks": true,

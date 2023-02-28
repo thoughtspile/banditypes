@@ -6,8 +6,11 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
+  "module": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./cjs": "./dist/cjs/index.js"
   },
   "types": "./dist/index.d.ts",
   "engines": {
@@ -19,7 +22,7 @@
     "format": "prettier --write --loglevel silent src",
     "verify": "npm run format && npm run test:coverage",
     "size": "node bench/run",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc && tsc -p tsconfig.cjs.json"
   },
   "repository": {
     "type": "git",
