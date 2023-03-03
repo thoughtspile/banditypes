@@ -1,4 +1,4 @@
 import { number } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<number>(number())
+expectTypeOf(number()).returns.toEqualTypeOf<number>()

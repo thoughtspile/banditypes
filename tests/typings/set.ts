@@ -1,4 +1,4 @@
 import { set, string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Set<string>>(set(string()))
+expectTypeOf(set(string())).returns.toEqualTypeOf<Set<string>>()

@@ -1,11 +1,12 @@
 import { object, number, string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<{
+
+const schemaA = { a: number() };
+const schemaB = { b: string() };
+const merged = object({ ...schemaA, ...schemaB });
+
+expectTypeOf(merged).returns.toEqualTypeOf<{
   a: number
   b: string
-}>((x) => {
-  const schemaA = { a: number() };
-  const schemaB = { b: string() };
-  return object({ ...schemaA, ...schemaB })(x);
-})
+}>();

@@ -1,4 +1,4 @@
 import { record, number } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Record<string, number>>(record(number()))
+expectTypeOf(record(number())).returns.toEqualTypeOf<Record<string, number>>()

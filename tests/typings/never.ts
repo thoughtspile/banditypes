@@ -1,5 +1,4 @@
 import { never } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<never>(never())
-
+expectTypeOf(never()).returns.toEqualTypeOf<never>();

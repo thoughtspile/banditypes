@@ -1,8 +1,8 @@
 import { string, object, enums } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string | null>(string().or(enums([null])))
+expectTypeOf(string().or(enums([null]))).returns.toEqualTypeOf<string | null>();
 
-test<{ a: string | null }>(object({ a: string().or(enums([null])) }))
+expectTypeOf(object({ a: string().or(enums([null])) })).returns.toEqualTypeOf<{ a: string | null }>()
 
-test<'a' | 'b' | null>(enums(['a', 'b', null]))
+expectTypeOf(enums(['a', 'b', null])).returns.toEqualTypeOf<'a' | 'b' | null>()

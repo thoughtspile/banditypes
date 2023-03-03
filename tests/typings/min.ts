@@ -1,4 +1,4 @@
 import { number, fail } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<number>(number().map(num => num > 0 ? num : fail()))
+expectTypeOf(number().map(num => num > 0 ? num : fail())).returns.toEqualTypeOf<number>()

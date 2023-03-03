@@ -81,6 +81,7 @@ export const record = <Item>(
     }
     return res;
   });
+
 export const object = <T = Record<string, never>>(schema: {
   [K in keyof T]: Cast<T[K]>;
 }) =>

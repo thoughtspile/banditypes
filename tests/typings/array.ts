@@ -1,5 +1,5 @@
 import { array, number, unknown } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<unknown[]>(array(unknown()))
-test<number[]>(array(number()))
+expectTypeOf(array(unknown())).returns.toEqualTypeOf<unknown[]>()
+expectTypeOf(array(number())).returns.toEqualTypeOf<number[]>()

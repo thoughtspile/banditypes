@@ -1,4 +1,4 @@
 import { string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string>(string().map(x => x.trim()))
+expectTypeOf(string().map(x => x.trim())).returns.toEqualTypeOf<string>()

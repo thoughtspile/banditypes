@@ -1,4 +1,4 @@
 import { lazy, string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string>(lazy(() => string()))
+expectTypeOf(lazy(() => string())).returns.toEqualTypeOf<string>();

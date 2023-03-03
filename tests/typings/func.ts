@@ -1,4 +1,4 @@
 import { func } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Function>(func)
+expectTypeOf(func()).returns.toEqualTypeOf<(...args: unknown[]) => unknown>();

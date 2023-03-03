@@ -1,4 +1,4 @@
 import { map, string, number } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Map<string, number>>(map(string(), number()))
+expectTypeOf(map(string(), number())).returns.toEqualTypeOf<Map<string, number>>()
