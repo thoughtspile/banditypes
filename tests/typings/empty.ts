@@ -1,10 +1,10 @@
 import { string, array, map, set, fail, unknown } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string>(string().map(v => v.length ? fail() : v))
+expectTypeOf(string().map(v => v.length ? fail() : v)).returns.toEqualTypeOf<string>();
 
-test<Array<unknown>>(array(unknown()).map(v => v.length ? fail() : v))
+expectTypeOf(array(unknown()).map(v => v.length ? fail() : v)).returns.toEqualTypeOf<Array<unknown>>();
 
-test<Set<unknown>>(set(unknown()).map(v => v.size ? fail() : v))
+expectTypeOf(set(unknown()).map(v => v.size ? fail() : v)).returns.toEqualTypeOf<Set<unknown>>();
 
-test<Map<unknown, unknown>>(map(unknown(), unknown()).map(v => v.size ? fail() : v))
+expectTypeOf(map(unknown(), unknown()).map(v => v.size ? fail() : v)).returns.toEqualTypeOf<Map<unknown, unknown>>();

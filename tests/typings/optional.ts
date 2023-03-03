@@ -1,12 +1,12 @@
 import { optional, string, number, object, enums } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type';
 
-test<string | undefined>(string().or(optional()))
+expectTypeOf(string().or(optional())).returns.toEqualTypeOf<string | undefined>()
 
-test<{
-  a?: number | undefined
-  b: string
-}>(object({
+expectTypeOf(object({
   a: number().or(optional()),
   b: string(),
-}))
+})).returns.toEqualTypeOf<{
+  a?: number
+  b: string
+}>()

@@ -1,4 +1,4 @@
 import { unknown } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<unknown>(unknown())
+expectTypeOf(unknown()).returns.toEqualTypeOf<unknown>()

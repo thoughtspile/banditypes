@@ -16,93 +16,71 @@ import {
   set,
   unknown,
 } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Banditype<Array<string>>>((x) => {
-  return array(string())
-})
+expectTypeOf(array(string()))
+  .toEqualTypeOf<Banditype<Array<string>>>();
 
-test<Banditype<boolean>>((x) => {
-  return boolean()
-})
+expectTypeOf(boolean())
+  .toEqualTypeOf<Banditype<boolean>>();
 
-test<Banditype<'a' | 'b' | 'c'>>((x) => {
-  return enums(['a', 'b', 'c'])
-})
+expectTypeOf(enums(['a', 'b', 'c']))
+  .toEqualTypeOf<Banditype<'a' | 'b' | 'c'>>();
 
-test<Banditype<1 | 2 | 3>>((x) => {
-  return enums([1, 2, 3])
-})
+expectTypeOf(enums([1, 2, 3]))
+  .toEqualTypeOf<Banditype<1 | 2 | 3>>();
 
-test<Banditype<Function>>((x) => {
-  return func()
-})
+expectTypeOf(func())
+  .toEqualTypeOf<Banditype<(...args: unknown[]) => unknown>>();
 
 
-test<Banditype<false>>((x) => {
-  return enums([false])
-})
+expectTypeOf(enums([false]))
+  .toEqualTypeOf<Banditype<false>>();
 
-test<Banditype<42>>((x) => {
-  return enums([42])
-})
+expectTypeOf(enums([42]))
+  .toEqualTypeOf<Banditype<42>>();
 
-test<Banditype<'test'>>((x) => {
-  return enums(['test'])
-})
+expectTypeOf(enums(['test']))
+  .toEqualTypeOf<Banditype<'test'>>();
 
-test<Banditype<Map<string, number>>>((x) => {
-  return map(string(), number())
-})
+expectTypeOf(map(string(), number()))
+  .toEqualTypeOf<Banditype<Map<string, number>>>();
 
-test<Banditype<never>>((x) => {
-  return never()
-})
+expectTypeOf(never())
+  .toEqualTypeOf<Banditype<never>>();
 
-test<Banditype<string | null>>((x) => {
-  return string().or(nullable())
-})
+expectTypeOf(string().or(nullable()))
+  .toEqualTypeOf<Banditype<string | null>>();
 
-test<Banditype<number>>((x) => {
-  return number()
-})
+expectTypeOf(number())
+  .toEqualTypeOf<Banditype<number>>();
 
-test<Banditype<{ name: string }>>((x) => {
-  return object({ name: string() })
-})
+expectTypeOf(object({ name: string() }))
+  .toEqualTypeOf<Banditype<{ name: string }>>();
 
-test<Banditype<{ name?: string | undefined }>>((x) => {
-  return object({ name: string().or(optional()) })
-})
+expectTypeOf(object({ name: string().or(optional()) }))
+  .toEqualTypeOf<Banditype<{ name?: string }>>();
 
-test<Banditype<string | undefined>>((x) => {
-  return string().or(optional())
-})
+expectTypeOf(string().or(optional()))
+  .toEqualTypeOf<Banditype<string | undefined>>();
 
-test<Banditype<Record<string, number>>>((x) => {
-  return record(number())
-})
+expectTypeOf(record(number()))
+  .toEqualTypeOf<Banditype<Record<string, number>>>();
 
-test<Banditype<Set<number>>>((x) => {
-  return set(number())
-})
+expectTypeOf(set(number()))
+  .toEqualTypeOf<Banditype<Set<number>>>();
 
-test<Banditype<string>>((x) => {
-  return string()
-})
+expectTypeOf(string())
+  .toEqualTypeOf<Banditype<string>>();
 
-test<Banditype<[string]>>((x) => {
-  return tuple([string()] as const)
-})
+expectTypeOf(tuple([string()] as const))
+  .toEqualTypeOf<Banditype<[string]>>();
 
-test<Banditype<[string, number]>>((x) => {
-  return tuple([string(), number()] as const)
-})
+expectTypeOf(tuple([string(), number()] as const))
+  .toEqualTypeOf<Banditype<[string, number]>>();
 
-test<Banditype<string | number>>((x) => {
-  return string().or(number())
-})
+expectTypeOf(string().or(number()))
+  .toEqualTypeOf<Banditype<string | number>>();
 
-test<Banditype<unknown>>((x) => {
-  return unknown()
-})
+expectTypeOf(unknown())
+  .toEqualTypeOf<Banditype<unknown>>();

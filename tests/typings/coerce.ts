@@ -1,4 +1,4 @@
 import { string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<number>(string().map(x => parseFloat(x)));
+expectTypeOf(string().map(x => parseFloat(x))).returns.toEqualTypeOf<number>();

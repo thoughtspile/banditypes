@@ -1,4 +1,4 @@
 import { boolean } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<boolean>(boolean())
+expectTypeOf(boolean()).returns.toEqualTypeOf<boolean>()

@@ -1,9 +1,12 @@
 import { object, number, string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Record<string, never>>(object({}))
+expectTypeOf(object({})).returns.toEqualTypeOf<Record<string, never>>()
 
-test<{
+expectTypeOf(object({ 
+  a: number(), 
+  b: string()
+})).returns.toEqualTypeOf<{
   a: number
   b: string
-}>(object({ a: number(), b: string() }))
+}>()

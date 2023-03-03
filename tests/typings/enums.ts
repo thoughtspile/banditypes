@@ -1,29 +1,29 @@
 import {  enums } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<'a' | 'b' | 'c'>((x) => {
+expectTypeOf((x) => {
   return enums(['a', 'b', 'c'])(x)
-})
+}).returns.toEqualTypeOf<'a' | 'b' | 'c'>();
 
-test<1 | 2 | 3>((x) => {
+expectTypeOf((x) => {
   return enums([1, 2, 3])(x)
-})
+}).returns.toEqualTypeOf<1 | 2 | 3>();
 
-test<1 | 2 | 3>((x) => {
+expectTypeOf((x) => {
   return enums([1, 2, 3] as const)(x)
-})
+}).returns.toEqualTypeOf<1 | 2 | 3>();
 
-test<1 | true | '1'>(x => {
+expectTypeOf((x) => {
   return enums([1, true, '1'])(x)
-})
+}).returns.toEqualTypeOf<1 | true | '1'>();
 
 const unique = Symbol();
 const unique2 = Symbol();
-test<typeof unique | typeof unique2>(x => {
+expectTypeOf((x) => {
   return enums([unique, unique2])(x)
-})
+}).returns.toEqualTypeOf<typeof unique | typeof unique2>();
 
-test<number>((x) => {
+expectTypeOf((x) => {
   let values = [1, 2, 3]
   return enums(values)(x)
-})
+}).returns.toEqualTypeOf<number>();

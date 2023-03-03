@@ -1,4 +1,4 @@
 import { string } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string>(string().or(() => 'default'))
+expectTypeOf(string().or(() => 'default')).returns.toEqualTypeOf<string>();

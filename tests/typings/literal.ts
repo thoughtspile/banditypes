@@ -1,10 +1,10 @@
 import { enums } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<true>(enums([true]))
+expectTypeOf(enums([true])).returns.toEqualTypeOf<true>()
 
-test<'a'>(enums(['a']))
+expectTypeOf(enums(['a'])).returns.toEqualTypeOf<'a'>()
 
-test<42>(enums([42]))
+expectTypeOf(enums([42])).returns.toEqualTypeOf<42>()
 
-test<Date>(enums([new Date()]))
+expectTypeOf(enums([new Date()])).returns.toEqualTypeOf<Date>()

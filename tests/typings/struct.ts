@@ -1,4 +1,4 @@
 import { banditype } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<string>(banditype<string>((x) => x as string));
+expectTypeOf(banditype<string>((x) => x as string)).returns.toEqualTypeOf<string>()

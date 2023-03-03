@@ -1,4 +1,4 @@
 import { instance } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<RegExp>(instance(RegExp))
+expectTypeOf(instance(RegExp)).returns.toEqualTypeOf<RegExp>()

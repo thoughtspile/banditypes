@@ -1,4 +1,5 @@
 import { instance, fail } from '../../src'
-import { test } from '..'
+import { expectTypeOf } from 'expect-type'
 
-test<Date>(instance(Date).map(v => isNaN(v.getTime()) ? fail() : v));
+expectTypeOf(instance(Date).map(v => isNaN(v.getTime()) ? fail() : v)).returns
+  .toEqualTypeOf<Date>();
