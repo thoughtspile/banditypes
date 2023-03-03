@@ -1,19 +1,26 @@
 {
-	"compilerOptions": {
-		"module": "es2020",
-		"lib": ["ES2017", "DOM"],
-		"moduleResolution": "node",
-		"target": "ES2018",
-		"importsNotUsedAsValues": "error",
-		"isolatedModules": true,
-		"forceConsistentCasingInFileNames": true,
-		"strictNullChecks": true,
-		"noUncheckedIndexedAccess": true,
-		"esModuleInterop": true,
-		"declaration": true,
-		"rootDirs": ["./src"],
-		"outDir": "dist",
-	},
-	"include": ["src"]
+    "compilerOptions": {
+        "declaration": true,
+        "esModuleInterop": true,
+        "exactOptionalPropertyTypes": true,
+        "forceConsistentCasingInFileNames": true,
+        "importsNotUsedAsValues": "error",
+        "isolatedModules": true,
+        "lib": [
+            "ES2017",
+            "DOM"
+        ],
+        "module": "es2020",
+        "moduleResolution": "node",
+        "noUncheckedIndexedAccess": true,
+        "outDir": "dist",
+        "rootDirs": [
+            "./src"
+        ],
+        "strictNullChecks": true,
+        "target": "ES2018"
+    },
+    "include": [
+        "src"
+    ]
 }
-
