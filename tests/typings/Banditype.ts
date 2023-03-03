@@ -71,7 +71,7 @@ test<Banditype<{ name: string }>>((x) => {
   return object({ name: string() })
 })
 
-test<Banditype<{ name?: string }>>((x) => {
+test<Banditype<{ name?: string | undefined }>>((x) => {
   return object({ name: string().or(optional()) })
 })
 

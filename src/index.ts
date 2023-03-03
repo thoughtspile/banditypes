@@ -1,3 +1,14 @@
+type Simplify<T> = T extends Object ? { [K in keyof T]: T[K] } : T;
+type WithOptionalProps<T> = Simplify<
+  Partial<T> &
+    Pick<
+      T,
+      {
+        [K in keyof T]: T[K] extends Exclude<T[K], undefined> ? K : never;
+      }[keyof T]
+    >
+>;
+
 export type Cast<T, Source = unknown> = (data: Source) => T;
 export type Infer<Schema extends Cast<unknown>> = ReturnType<Schema>;
 // Chainable API
@@ -79,7 +90,7 @@ export const object = <T = Record<string, never>>(schema: {
       const f = schema[key](raw[key]);
       f !== undefined && (res[key] = f);
     }
-    return res as T;
+    return res as WithOptionalProps<T>;
   });
 export const objectLoose = <
   T extends Record<string, unknown> = Record<string, never>
@@ -92,7 +103,7 @@ export const objectLoose = <
       const f = schema[key](raw[key]);
       f !== undefined && (res[key] = f);
     }
-    return res as T;
+    return res as WithOptionalProps<T>;
   });
 
 // arrays
