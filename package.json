@@ -21,8 +21,10 @@
   "scripts": {
     "test": "rm -rf dist/tests && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
     "test:coverage": "c8 --100 --exclude dist/tests npm test",
-    "format": "prettier --write --loglevel silent src",
-    "verify": "npm run format && npm run test:coverage",
+    "lint:all": "prettier --check --loglevel warn .",
+    "format": "prettier --loglevel silent --write",
+    "format:all": "npm run format -- .",
+    "format:staged": "npx nano-staged",
     "size": "node bench/run",
     "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/index.js dist/cjs/index.cjs",
     "build": "rm -rf dist && tsc && npm run build:cjs"
@@ -47,6 +49,8 @@
     "c8": "^7.13.0",
     "esbuild": "^0.17.10",
     "expect-type": "^0.15.0",
+    "nano-staged": "^0.8.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.8.4",
     "superstruct": "^1.0.3",
     "terser": "^5.16.4",
@@ -54,5 +58,12 @@
     "typescript": "^4.9.5",
     "uvu": "^0.5.6",
     "zod": "^3.20.6"
-  }
+  },
+  "nano-staged": {
+    "*": "prettier --loglevel silent --write"
+  },
+  "precommit": [
+    "format:staged",
+    "test:coverage"
+  ]
 }

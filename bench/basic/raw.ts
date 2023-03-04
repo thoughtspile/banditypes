@@ -1,7 +1,7 @@
-import { sample } from './sample';
+import { sample } from "./sample";
 
 try {
   console.log(sample);
 } catch (err) {
-  console.log('fail');
+  console.log("fail");
 }

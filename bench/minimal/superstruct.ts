@@ -1,3 +1,3 @@
 import { create, define } from "superstruct";
 
-console.log(define('', (value) => !value || '').create(window['']));
+console.log(define("", (value) => !value || "").create(window[""]));

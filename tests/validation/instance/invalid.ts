@@ -1,15 +1,15 @@
-import { instance } from '../../../src/index.js'
+import { instance } from "../../../src/index.js";
 
-export const Struct = instance(Array)
+export const Struct = instance(Array);
 
-export const data = false
+export const data = false;
 
 export const failures = [
   {
     value: false,
-    type: 'instance',
+    type: "instance",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

@@ -1,34 +1,34 @@
-import { objectLoose, string, number } from '../../../src/index.js'
+import { objectLoose, string, number } from "../../../src/index.js";
 
-const A = objectLoose({ a: string() })
-const B = objectLoose({ b: number() })
+const A = objectLoose({ a: string() });
+const B = objectLoose({ b: number() });
 
-export const Struct = A.or(B)
+export const Struct = A.or(B);
 
 export const data = {
-  b: 'invalid',
-}
+  b: "invalid",
+};
 
 export const failures = [
   {
-    value: { b: 'invalid' },
-    type: 'union',
+    value: { b: "invalid" },
+    type: "union",
     refinement: undefined,
     path: [],
     branch: [data],
   },
   {
     value: undefined,
-    type: 'string',
+    type: "string",
     refinement: undefined,
-    path: ['a'],
+    path: ["a"],
     branch: [data, undefined],
   },
   {
-    value: 'invalid',
-    type: 'number',
+    value: "invalid",
+    type: "number",
     refinement: undefined,
-    path: ['b'],
+    path: ["b"],
     branch: [data, data.b],
   },
-]
+];

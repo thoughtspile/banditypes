@@ -1,25 +1,25 @@
-import { map, string, number } from '../../../src/index.js'
+import { map, string, number } from "../../../src/index.js";
 
-export const Struct = map(string(), number())
+export const Struct = map(string(), number());
 
 export const data = new Map([
-  ['a', 'a'],
-  ['b', 'b'],
-])
+  ["a", "a"],
+  ["b", "b"],
+]);
 
 export const failures = [
   {
-    value: 'a',
-    type: 'number',
+    value: "a",
+    type: "number",
     refinement: undefined,
-    path: ['a'],
-    branch: [data, 'a'],
+    path: ["a"],
+    branch: [data, "a"],
   },
   {
-    value: 'b',
-    type: 'number',
+    value: "b",
+    type: "number",
     refinement: undefined,
-    path: ['b'],
-    branch: [data, 'b'],
+    path: ["b"],
+    branch: [data, "b"],
   },
-]
+];

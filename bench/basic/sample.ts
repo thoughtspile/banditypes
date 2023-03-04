@@ -6,6 +6,6 @@ export interface Data {
 
 export const sample: Data = {
   boolean: true,
-  array: ['tag', 'date'],
+  array: ["tag", "date"],
   count: 10,
 };

@@ -1,15 +1,15 @@
-import { func } from '../../../src/index.js'
+import { func } from "../../../src/index.js";
 
-export const Struct = func()
+export const Struct = func();
 
-export const data = false
+export const data = false;
 
 export const failures = [
   {
     value: false,
-    type: 'func',
+    type: "func",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

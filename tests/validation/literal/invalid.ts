@@ -1,15 +1,15 @@
-import { enums } from '../../../src/index.js'
+import { enums } from "../../../src/index.js";
 
-export const Struct = enums([42])
+export const Struct = enums([42]);
 
-export const data = false
+export const data = false;
 
 export const failures = [
   {
     value: false,
-    type: 'literal',
+    type: "literal",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

@@ -1,15 +1,15 @@
-import { boolean } from '../../../src/index.js'
+import { boolean } from "../../../src/index.js";
 
-export const Struct = boolean()
+export const Struct = boolean();
 
-export const data = 'invalid'
+export const data = "invalid";
 
 export const failures = [
   {
-    value: 'invalid',
-    type: 'boolean',
+    value: "invalid",
+    type: "boolean",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

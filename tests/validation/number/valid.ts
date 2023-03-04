@@ -1,7 +1,7 @@
-import { number } from '../../../src/index.js'
+import { number } from "../../../src/index.js";
 
-export const Struct = number()
+export const Struct = number();
 
-export const data = 42
+export const data = 42;
 
-export const output = 42
+export const output = 42;

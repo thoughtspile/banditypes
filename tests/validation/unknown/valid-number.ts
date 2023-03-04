@@ -1,7 +1,7 @@
-import { unknown } from '../../../src/index.js'
+import { unknown } from "../../../src/index.js";
 
-export const Struct = unknown()
+export const Struct = unknown();
 
-export const data = 1
+export const data = 1;
 
-export const output = 1
+export const output = 1;

@@ -1,15 +1,15 @@
-import { never } from '../../../src/index.js'
+import { never } from "../../../src/index.js";
 
-export const Struct = never()
+export const Struct = never();
 
-export const data = true
+export const data = true;
 
 export const failures = [
   {
     value: true,
-    type: 'never',
+    type: "never",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

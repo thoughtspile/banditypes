@@ -1,30 +1,30 @@
-import { object, string, number } from '../../../src/index.js'
+import { object, string, number } from "../../../src/index.js";
 
 export const Struct = object({
   name: string(),
   age: number(),
   height: string(),
-})
+});
 
 export const data = {
-  name: 'john',
-  age: 'invalid',
+  name: "john",
+  age: "invalid",
   height: 2,
-}
+};
 
 export const failures = [
   {
-    value: 'invalid',
-    type: 'number',
+    value: "invalid",
+    type: "number",
     refinement: undefined,
-    path: ['age'],
+    path: ["age"],
     branch: [data, data.age],
   },
   {
     value: 2,
-    type: 'string',
+    type: "string",
     refinement: undefined,
-    path: ['height'],
+    path: ["height"],
     branch: [data, data.height],
   },
-]
+];

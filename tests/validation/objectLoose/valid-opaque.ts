@@ -1,13 +1,13 @@
-import { objectLoose } from '../../../src/index.js'
+import { objectLoose } from "../../../src/index.js";
 
-export const Struct = objectLoose({})
+export const Struct = objectLoose({});
 
 export const data = {
-  a: 'string',
+  a: "string",
   b: 42,
-}
+};
 
 export const output = {
-  a: 'string',
+  a: "string",
   b: 42,
-}
+};

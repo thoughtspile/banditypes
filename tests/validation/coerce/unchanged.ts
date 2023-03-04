@@ -1,11 +1,11 @@
-import { string, unknown } from '../../../src/index.js'
+import { string, unknown } from "../../../src/index.js";
 
-export const Struct = unknown().map((x) =>
-  x == null ? 'unknown' : x
-).map(string())
+export const Struct = unknown()
+  .map((x) => (x == null ? "unknown" : x))
+  .map(string());
 
-export const data = 'known'
+export const data = "known";
 
-export const output = 'known'
+export const output = "known";
 
-export const create = true
+export const create = true;
