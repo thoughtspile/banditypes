@@ -21,8 +21,9 @@
   "scripts": {
     "test": "rm -rf dist/tests && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
     "test:coverage": "c8 --100 --exclude dist/tests npm test",
-    "format": "prettier --write --loglevel silent src",
-    "verify": "npm run format && npm run test:coverage",
+    "lint": "prettier --check --loglevel warn .",
+    "format": "prettier --loglevel silent --write .",
+    "verify": "npm run lint && npm run test:coverage",
     "size": "node bench/run",
     "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/index.js dist/cjs/index.cjs",
     "build": "rm -rf dist && tsc && npm run build:cjs"
