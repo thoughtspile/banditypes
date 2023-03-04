@@ -25,5 +25,6 @@ jobs:
       - run: npm run build
       - run: npm version ${{ inputs.newversion }}
       - run: npm publish
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: git push --follow-tags
