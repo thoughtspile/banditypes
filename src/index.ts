@@ -83,7 +83,7 @@ export const record = <Item>(
   });
 
 export const object = <T = Record<string, never>>(schema: {
-  [K in keyof T]: Cast<T[K]>;
+  [K in keyof Required<T>]: Cast<T[K]>;
 }) =>
   instance(Object).map((raw: any) => {
     const res = {} as T;
@@ -96,7 +96,7 @@ export const object = <T = Record<string, never>>(schema: {
 export const objectLoose = <
   T extends Record<string, unknown> = Record<string, never>
 >(schema: {
-  [K in keyof T]: Cast<T[K]>;
+  [K in keyof Required<T>]: Cast<T[K]>;
 }) =>
   instance(Object).map((raw: any) => {
     const res = { ...raw };
