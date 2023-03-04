@@ -25,7 +25,6 @@
     "format": "prettier --loglevel silent --write",
     "format:all": "npm run format -- .",
     "format:staged": "npx nano-staged",
-    "verify": "npm run lint:all && npm run test:coverage",
     "size": "node bench/run",
     "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/index.js dist/cjs/index.cjs",
     "build": "rm -rf dist && tsc && npm run build:cjs"
@@ -63,5 +62,8 @@
   "nano-staged": {
     "*": "prettier --loglevel silent --write"
   },
-  "precommit": ["format:staged", "test:coverage"]
+  "precommit": [
+    "format:staged",
+    "test:coverage"
+  ]
 }
