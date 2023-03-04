@@ -1,7 +1,7 @@
 import { suite as makeSuite } from 'uvu';
 import { equal, throws } from 'uvu/assert';
 import fs from 'fs'
-import { basename, dirname, extname, resolve } from 'path'
+import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -21,7 +21,7 @@ async function testValidation() {
 
     for (const name of tests) {
       const module = await import(resolve(testsDir, name));
-      const { Struct, data, create, only, skip, output, failures } = module
+      const { Struct, data, only, skip, output } = module
       const run = only ? suite.only : skip ? suite.skip : suite;
       run(name, () => {
         let actual
