@@ -1,0 +1,29 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      newversion:
+        description: "Version bump"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          registry-url: "https://registry.npmjs.org"
+          node-version: 16
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm version ${{ inputs.newversion }}
+      - run: npm publish
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: git push --follow-tags
