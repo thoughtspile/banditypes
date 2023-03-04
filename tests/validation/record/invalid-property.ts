@@ -1,25 +1,25 @@
-import { record, string, number } from '../../../src/index.js'
+import { record, string, number } from "../../../src/index.js";
 
-export const Struct = record(number())
+export const Struct = record(number());
 
 export const data = {
-  a: 'a',
-  b: 'b',
-}
+  a: "a",
+  b: "b",
+};
 
 export const failures = [
   {
-    value: 'a',
-    type: 'number',
+    value: "a",
+    type: "number",
     refinement: undefined,
-    path: ['a'],
+    path: ["a"],
     branch: [data, data.a],
   },
   {
-    value: 'b',
-    type: 'number',
+    value: "b",
+    type: "number",
     refinement: undefined,
-    path: ['b'],
+    path: ["b"],
     branch: [data, data.b],
   },
-]
+];

@@ -1,3 +1,3 @@
 import { banditype, fail } from "../../src";
 
-console.log(banditype(raw => raw ? fail() : raw)(window['']));
+console.log(banditype((raw) => (raw ? fail() : raw))(window[""]));

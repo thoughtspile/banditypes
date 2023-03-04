@@ -1,4 +1,4 @@
-import { number } from '../../src'
-import { expectTypeOf } from 'expect-type'
+import { number } from "../../src";
+import { expectTypeOf } from "expect-type";
 
-expectTypeOf(number()).returns.toEqualTypeOf<number>()
+expectTypeOf(number()).returns.toEqualTypeOf<number>();

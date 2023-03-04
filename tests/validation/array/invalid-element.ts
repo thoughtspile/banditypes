@@ -1,15 +1,15 @@
-import { array, number } from '../../../src/index.js'
+import { array, number } from "../../../src/index.js";
 
-export const Struct = array(number())
+export const Struct = array(number());
 
-export const data = [1, 'invalid', 3]
+export const data = [1, "invalid", 3];
 
 export const failures = [
   {
-    value: 'invalid',
-    type: 'number',
+    value: "invalid",
+    type: "number",
     refinement: undefined,
     path: [1],
     branch: [data, data[1]],
   },
-]
+];

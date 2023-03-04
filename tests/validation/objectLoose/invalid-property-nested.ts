@@ -1,4 +1,4 @@
-import { objectLoose, string, number } from '../../../src/index.js'
+import { objectLoose, string, number } from "../../../src/index.js";
 
 export const Struct = objectLoose({
   id: number(),
@@ -6,18 +6,18 @@ export const Struct = objectLoose({
     name: string(),
     age: number(),
   }),
-})
+});
 
 export const data = {
   id: 1,
-}
+};
 
 export const failures = [
   {
     value: undefined,
-    type: 'type',
+    type: "type",
     refinement: undefined,
-    path: ['person'],
+    path: ["person"],
     branch: [data, undefined],
   },
-]
+];

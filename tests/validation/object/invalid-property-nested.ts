@@ -1,4 +1,4 @@
-import { object, string } from '../../../src/index.js'
+import { object, string } from "../../../src/index.js";
 
 export const Struct = object({
   name: string(),
@@ -6,22 +6,22 @@ export const Struct = object({
     street: string(),
     city: string(),
   }),
-})
+});
 
 export const data = {
-  name: 'john',
+  name: "john",
   address: {
     street: 123,
-    city: 'Springfield',
+    city: "Springfield",
   },
-}
+};
 
 export const failures = [
   {
     value: 123,
-    type: 'string',
+    type: "string",
     refinement: undefined,
-    path: ['address', 'street'],
+    path: ["address", "street"],
     branch: [data, data.address, data.address.street],
   },
-]
+];

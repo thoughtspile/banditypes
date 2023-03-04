@@ -22,7 +22,16 @@ Banditypes is a 400-byte lib, tradeoffs have been made:
 This is not a library for everybody, but it gets the job done, and it's small. Here's a usage example:
 
 ```ts
-import { assert, object, number, string, array, optional, fail, Infer } from 'banditypes'
+import {
+  assert,
+  object,
+  number,
+  string,
+  array,
+  optional,
+  fail,
+  Infer,
+} from "banditypes";
 
 const parseGunslinger = object({
   name: string(),
@@ -30,9 +39,9 @@ const parseGunslinger = object({
   guns: array(string()),
   born: object({
     state: string().or(optional()),
-    year: number().map(n => Number.isInteger(n) ? n : fail()),
+    year: number().map((n) => (Number.isInteger(n) ? n : fail())),
   }),
-})
+});
 
 // Explicit inference
 type Gunslinger = Infer<typeof parseGunslinger>;
@@ -45,13 +54,13 @@ const raw = JSON.parse(`{
     state: 'Idaho',
     year: 1872
   }
-}`)
+}`);
 try {
-  const data = parseGunslinger(raw)
+  const data = parseGunslinger(raw);
   // fully type-safe access
   console.log(`${data.name} from ${data.born.state} is out to kill ya`);
 } catch (err) {
-  console.log('invalid JSON')
+  console.log("invalid JSON");
 }
 ```
 
@@ -84,21 +93,21 @@ banditypes includes all the types you'd expect in a validation library:
 
 ```ts
 // primitives
-string()
-number()
-boolean()
+string();
+number();
+boolean();
 
 // always fails
-never()
+never();
 // always passes
-unknown()
+unknown();
 
 // instanceof check
-instance(MyClass)
+instance(MyClass);
 
 // checks if value is a function
 // static input / output validation is not possible in JS
-func()
+func();
 
 // { key: string; nullable: string | null; maybe?: string }
 object({
@@ -107,40 +116,40 @@ object({
   nullable: string().or(nullable()),
   // optional field
   maybe: string().or(optional()),
-})
+});
 // { key: string }, but don't remove other properties
 objectLoose({
-  key: string()
-})
+  key: string(),
+});
 // number[]
-array(number())
+array(number());
 // Record<string, boolean>
 record(boolean());
 
 // Set<number>
-set(number())
+set(number());
 // Map<number, boolean>
-map(number(), boolean())
+map(number(), boolean());
 // [number, string]
 // NOTE: "as const" must be used
-tuple([number(), string()] as const)
+tuple([number(), string()] as const);
 
 // value comes from a set
 enums([1, 2]); // infers 1 | 2
 // mixed-type enums are OK:
-enums([true, 0, '']);
+enums([true, 0, ""]);
 // literal type is a single-value enum:
-enums([42])
+enums([42]);
 ```
 
 Every validator is just a function that returns the argument if it passes validation _or_ throws:
 
 ```js
-const yes = string()('ok');
+const yes = string()("ok");
 const no = string()(0);
 ```
 
-- Non-primitive validators always clone the data passed. 
+- Non-primitive validators always clone the data passed.
 - `object` strips the keys not defined in the schema — to pass-through undeclared keys, use `objectLoose`.
 - `tuple` trims the undeclared tail of the array.
 - Object keys where validation returns `undefined` are stripped.
@@ -156,9 +165,9 @@ As a luxury treat, every banditype has two methods: `map` for conversion and ref
 
 ```ts
 const schema = string().or(number());
-schema(0) // ok
-schema('hello') // ok
-schema(null) // throws
+schema(0); // ok
+schema("hello"); // ok
+schema(null); // throws
 type S = Infer<typeof schema>; // string | number
 ```
 
@@ -174,10 +183,10 @@ const optionalString = string().or(nullable());
 ...and default values — note that it is called on every validation error, not just missing values:
 
 ```ts
-const defaulted = string().or(() => 'Manos arriba');
-defaulted('hello') // 'hello'
-defaulted(null) // 'Manos arriba'
-defaulted({ hello: true }) // 'Manos arriba'
+const defaulted = string().or(() => "Manos arriba");
+defaulted("hello"); // 'hello'
+defaulted(null); // 'Manos arriba'
+defaulted({ hello: true }); // 'Manos arriba'
 ```
 
 ### map
@@ -185,26 +194,28 @@ defaulted({ hello: true }) // 'Manos arriba'
 `banditype.map` can be used for type refinement: run the check and return the value if it passes, or `fail()`:
 
 ```ts
-const nonemptyString = string().map(s => s.length ? s : fail());
-const date = instance(Date).map(date => Number.isNaN(+date) ? fail() : date);
+const nonemptyString = string().map((s) => (s.length ? s : fail()));
+const date = instance(Date).map((date) =>
+  Number.isNaN(+date) ? fail() : date
+);
 ```
 
 Or to convert between types:
 
 ```ts
-const sum = array(number()).map(arr => arr.reduce((acc, x) => acc + x, 0));
-sum([1,2,3]) // -> 6
-sum(['1', '2', '3']) // throws
+const sum = array(number()).map((arr) => arr.reduce((acc, x) => acc + x, 0));
+sum([1, 2, 3]); // -> 6
+sum(["1", "2", "3"]); // throws
 const strFromNum = number().map(String);
-strFromNum(9) // -> '9'
-strFromNum('9') // throws
+strFromNum(9); // -> '9'
+strFromNum("9"); // throws
 ```
 
 Or _maybe_ as an intersection type, but the inferred type is always the type of the final cast, _not_ the intersection:
 
 ```ts
-const ab = objectLoose({ a: string() }).map(objectLoose({ b: string() }))
-type AB = Infer<typeof ab> // { b: string }
+const ab = objectLoose({ a: string() }).map(objectLoose({ b: string() }));
+type AB = Infer<typeof ab>; // { b: string }
 ```
 
 ## Cast functions
@@ -212,10 +223,9 @@ type AB = Infer<typeof ab> // { b: string }
 Cast functions are the central concept of banditypes: they accept `unknown` argument and return a value of type `T` or throw. These all are string-cast functions:
 
 ```ts
-const isString = (raw: unknown) => 
-  typeof raw === 'string' ? raw : fail();
-const isNonemptyString = (raw: unknown) => 
-  typeof raw === 'string' && raw.length > 0 ? raw : fail();  
+const isString = (raw: unknown) => (typeof raw === "string" ? raw : fail());
+const isNonemptyString = (raw: unknown) =>
+  typeof raw === "string" && raw.length > 0 ? raw : fail();
 ```
 
 But so are these, doing type conversion:
@@ -228,22 +238,22 @@ const toJson = (raw: unknown) => JSON.stringify(raw);
 Bare cast functions are allowed as arguments in collection types:
 
 ```ts
-const tag = Symbol()
+const tag = Symbol();
 object({
   // unique symbol check
-  tag: x => x === tag ? x : fail()
-})
+  tag: (x) => (x === tag ? x : fail()),
+});
 // array of falsy values
-array(raw => !raw ? raw : fail())
+array((raw) => (!raw ? raw : fail()));
 ```
 
 Wrapping a cast in `banditype()` appends `.map` and `.or` methods, giving you a custom chainable type (note that the function you pass is mutated):
 
 ```ts
-const mySheriff = banditype<MySheriff>(raw => 
-  MySheriff.isSheriff(raw) ? raw : fail());
-const angrySheriff = mySheriff
-  .map(s => s.isAngry ? s : fail());
+const mySheriff = banditype<MySheriff>((raw) =>
+  MySheriff.isSheriff(raw) ? raw : fail()
+);
+const angrySheriff = mySheriff.map((s) => (s.isAngry ? s : fail()));
 ```
 
 ## TS-first schemas
@@ -258,7 +268,7 @@ interface Bank {
 const bankSchema = object<Bank>({
   name: string(),
   money: number(),
-})
+});
 ```
 
 Very handy if your types are code-generated from GraphQL.

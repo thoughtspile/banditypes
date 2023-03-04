@@ -1,15 +1,15 @@
-import { map, string, number } from '../../../src/index.js'
+import { map, string, number } from "../../../src/index.js";
 
-export const Struct = map(string(), number())
+export const Struct = map(string(), number());
 
-export const data = 'invalid'
+export const data = "invalid";
 
 export const failures = [
   {
-    value: 'invalid',
-    type: 'map',
+    value: "invalid",
+    type: "map",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

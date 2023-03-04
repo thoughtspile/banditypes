@@ -1,15 +1,15 @@
-import { lazy, string } from '../../../src/index.js'
+import { lazy, string } from "../../../src/index.js";
 
-export const Struct = lazy(() => string())
+export const Struct = lazy(() => string());
 
-export const data = 3
+export const data = 3;
 
 export const failures = [
   {
     value: 3,
-    type: 'string',
+    type: "string",
     refinement: undefined,
     path: [],
     branch: [data],
   },
-]
+];

@@ -1,4 +1,4 @@
-import { expectTypeOf } from 'expect-type';
-import { banditype } from '../../src'
+import { expectTypeOf } from "expect-type";
+import { banditype } from "../../src";
 
-expectTypeOf(banditype<any>(raw => raw)).returns.toEqualTypeOf<any>();
+expectTypeOf(banditype<any>((raw) => raw)).returns.toEqualTypeOf<any>();

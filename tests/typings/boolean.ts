@@ -1,4 +1,4 @@
-import { boolean } from '../../src'
-import { expectTypeOf } from 'expect-type'
+import { boolean } from "../../src";
+import { expectTypeOf } from "expect-type";
 
-expectTypeOf(boolean()).returns.toEqualTypeOf<boolean>()
+expectTypeOf(boolean()).returns.toEqualTypeOf<boolean>();
