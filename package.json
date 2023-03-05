@@ -19,8 +19,8 @@
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test:types": "rm -rf dist && tsc && tsc -p tests/tsconfig.dts.json",
-    "test:runtime": "rm -rf dist/tests && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
+    "test:types": "tsc && tsc -p tests/tsconfig.dts.json --noEmit",
+    "test:runtime": "rm -f dist/tests/**/*.{ts,js} && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude dist/tests npm test",
     "lint:all": "prettier --check --loglevel warn .",

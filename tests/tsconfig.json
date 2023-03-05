@@ -3,9 +3,10 @@
     "module": "esnext",
     "paths": {
       "$lib/*": ["../src/*"]
-    }
+    },
+    "incremental": true,
+    "tsBuildInfoFile": "../dist/test.tsbuildinfo"
   },
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"],
-  "exclude": ["./typings"]
+  "include": ["./**/*.ts"]
 }
