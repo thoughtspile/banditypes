@@ -1,4 +1,4 @@
-import { number, fail } from "../../src";
+import { number, fail } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

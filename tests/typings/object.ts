@@ -1,4 +1,4 @@
-import { object, number, string, Banditype } from "../../src";
+import { object, number, string, Banditype } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(object({})).returns.toEqualTypeOf<Record<string, never>>();

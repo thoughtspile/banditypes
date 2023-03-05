@@ -1,4 +1,4 @@
-import { object, number, string } from "../../src";
+import { object, number, string } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 const schemaA = { a: number() };

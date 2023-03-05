@@ -1,4 +1,4 @@
-import { array, number, unknown } from "../../src";
+import { array, number, unknown } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(array(unknown())).returns.toEqualTypeOf<unknown[]>();

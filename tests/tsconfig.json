@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "module": "esnext"
+    "module": "esnext",
+    "paths": {
+      "$lib/*": ["../src/*"]
+    }
   },
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["./typings"]
 }
