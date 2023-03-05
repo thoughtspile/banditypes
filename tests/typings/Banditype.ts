@@ -15,7 +15,7 @@ import {
   optional,
   set,
   unknown,
-} from "../../src";
+} from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(array(string())).toEqualTypeOf<Banditype<Array<string>>>();

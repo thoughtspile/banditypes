@@ -1,4 +1,4 @@
-import { record, number } from "../../src";
+import { record, number } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(record(number())).returns.toEqualTypeOf<Record<string, number>>();

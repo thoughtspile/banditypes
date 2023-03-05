@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "module": "esnext"
+    "module": "esnext",
+    "paths": {
+      "$lib/*": ["../src/*"]
+    },
+    "incremental": true,
+    "tsBuildInfoFile": "../dist/test.tsbuildinfo"
   },
   "extends": "../tsconfig.json",
   "include": ["./**/*.ts"]

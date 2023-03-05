@@ -1,4 +1,4 @@
-import { optional, string, number, object, enums } from "../../src";
+import { optional, string, number, object, enums } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(string().or(optional())).returns.toEqualTypeOf<

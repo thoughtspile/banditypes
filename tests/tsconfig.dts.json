@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "$lib/*": ["../dist/*"]
+    },
+    "incremental": true
+  },
+  "extends": "../tsconfig.json",
+  "include": ["./typings"]
+}
