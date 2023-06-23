@@ -47,12 +47,12 @@ const parseGunslinger = object({
 type Gunslinger = Infer<typeof parseGunslinger>;
 
 const raw = JSON.parse(`{
-  name: 'Dirty Bobby',
-  kills: 17,
-  guns: ['Colt 45'],
-  born: {
-    state: 'Idaho',
-    year: 1872
+  "name": 'Dirty Bobby',
+  "kills": 17,
+  "guns": ['Colt 45'],
+  "born": {
+    "state": 'Idaho',
+    "year": 1872
   }
 }`);
 try {
