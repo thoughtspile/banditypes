@@ -38,7 +38,7 @@ export const never = () => banditype(() => fail());
 export const unknown = () => banditype((raw) => raw);
 
 // literals
-// not sure why, but this signature prevents wideing [90] -> number[]
+// not sure why, but this signature prevents widening [90] -> number[]
 type Primitive = string | number | null | undefined | boolean | symbol | object;
 export const enums = <U extends Primitive, T extends readonly U[]>(items: T) =>
   banditype((raw) =>
