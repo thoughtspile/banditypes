@@ -9,7 +9,7 @@ expectTypeOf(
   object({
     a: number().or(optional()),
     b: string(),
-  })
+  }),
 ).returns.toEqualTypeOf<{
   a?: number;
   b: string;

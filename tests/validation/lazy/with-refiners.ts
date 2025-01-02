@@ -1,7 +1,7 @@
 import { lazy, fail, string } from "../../../src/index.js";
 
 export const Struct = lazy(() =>
-  string().map((s) => (s.length > 0 ? s : fail()))
+  string().map((s) => (s.length > 0 ? s : fail())),
 );
 
 export const data = "";

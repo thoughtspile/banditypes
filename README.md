@@ -196,7 +196,7 @@ defaulted({ hello: true }); // 'Manos arriba'
 ```ts
 const nonemptyString = string().map((s) => (s.length ? s : fail()));
 const date = instance(Date).map((date) =>
-  Number.isNaN(+date) ? fail() : date
+  Number.isNaN(+date) ? fail() : date,
 );
 ```
 
@@ -251,7 +251,7 @@ Wrapping a cast in `banditype()` appends `.map` and `.or` methods, giving you a 
 
 ```ts
 const mySheriff = banditype<MySheriff>((raw) =>
-  MySheriff.isSheriff(raw) ? raw : fail()
+  MySheriff.isSheriff(raw) ? raw : fail(),
 );
 const angrySheriff = mySheriff.map((s) => (s.isAngry ? s : fail()));
 ```
@@ -292,8 +292,6 @@ This is a great approach, especially for smaller libraries. Check out the sample
 ## Acknowledgements
 
 [Superstruct](https://github.com/ianstormtaylor/superstruct) was a major influence on banditypes with its modular design; shout out to [Ian Storm Taylor](https://twitter.com/ianstormtaylor) and all the contributors. I also borrowed superstruct's test suite.
-
-[Typed](https://github.com/brielov/typed/) by [Gabriel Vaquer](https://twitter.com/brielov) is another tiny validator that showed me it _is_ possible to deliver the same feature set in a minimal package.
 
 ## License
 
