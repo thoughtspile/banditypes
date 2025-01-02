@@ -11,7 +11,6 @@ export interface Data {
   extras: {
     form: Record<string, unknown>;
   };
-  children?: Data;
 }
 
 export const sample: Data = {

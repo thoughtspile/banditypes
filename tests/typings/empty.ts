@@ -2,17 +2,17 @@ import { string, array, map, set, fail, unknown } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(
-  string().map((v) => (v.length ? fail() : v))
+  string().map((v) => (v.length ? fail() : v)),
 ).returns.toEqualTypeOf<string>();
 
 expectTypeOf(
-  array(unknown()).map((v) => (v.length ? fail() : v))
+  array(unknown()).map((v) => (v.length ? fail() : v)),
 ).returns.toEqualTypeOf<Array<unknown>>();
 
 expectTypeOf(
-  set(unknown()).map((v) => (v.size ? fail() : v))
+  set(unknown()).map((v) => (v.size ? fail() : v)),
 ).returns.toEqualTypeOf<Set<unknown>>();
 
 expectTypeOf(
-  map(unknown(), unknown()).map((v) => (v.size ? fail() : v))
+  map(unknown(), unknown()).map((v) => (v.size ? fail() : v)),
 ).returns.toEqualTypeOf<Map<unknown, unknown>>();

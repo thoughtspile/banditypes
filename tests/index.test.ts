@@ -38,7 +38,7 @@ async function testValidation() {
           // assert.deepStrictEqual(pick(err, ...props), failures[0])
         } else {
           throw new Error(
-            `The "${name}" fixture did not define an \`output\` or \`failures\` export.`
+            `The "${name}" fixture did not define an \`output\` or \`failures\` export.`,
           );
         }
       });

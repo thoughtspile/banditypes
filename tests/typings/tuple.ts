@@ -49,7 +49,7 @@ expectTypeOf(
     enums(["39"]),
     enums(["40"]),
     enums(["41"]),
-  ] as const)
+  ] as const),
 ).returns.toEqualTypeOf<
   [
     "1",
@@ -92,6 +92,6 @@ expectTypeOf(
     "38",
     "39",
     "40",
-    "41"
+    "41",
   ]
 >;

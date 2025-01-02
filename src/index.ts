@@ -42,7 +42,7 @@ export const unknown = () => banditype((raw) => raw);
 type Primitive = string | number | null | undefined | boolean | symbol | object;
 export const enums = <U extends Primitive, T extends readonly U[]>(items: T) =>
   banditype((raw) =>
-    items.includes(raw as T[number]) ? (raw as T[number]) : fail()
+    items.includes(raw as T[number]) ? (raw as T[number]) : fail(),
   );
 
 // Basic types
@@ -71,7 +71,7 @@ export const instance = <T>(proto: new (...args: unknown[]) => T) =>
 
 // objects
 export const record = <Item>(
-  castValue: Cast<Item>
+  castValue: Cast<Item>,
 ): Banditype<Record<string, Item>> =>
   instance(Object).map((raw: any) => {
     const res: Record<string, Item> = {};
@@ -94,7 +94,7 @@ export const object = <T = Record<string, never>>(schema: {
     return res as WithOptionalProps<T>;
   });
 export const objectLoose = <
-  T extends Record<string, unknown> = Record<string, never>
+  T extends Record<string, unknown> = Record<string, never>,
 >(schema: {
   [K in keyof T]-?: Cast<T[K]>;
 }) =>

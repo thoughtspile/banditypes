@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "lib": ["ES2017", "DOM"],
     "module": "es2020",

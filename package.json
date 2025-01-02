@@ -23,10 +23,8 @@
     "test:runtime": "rm -f dist/tests/**/*.{ts,js} && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude dist/tests npm test",
-    "lint:all": "prettier --check --loglevel warn .",
-    "format": "prettier --loglevel silent --write",
-    "format:all": "npm run format -- .",
-    "format:staged": "npx nano-staged",
+    "lint": "prettier --check --log-level warn .",
+    "lint:fix": "prettier --loglevel silent --write .",
     "size": "node bench/run",
     "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/index.js dist/cjs/index.cjs",
     "build": "rm -rf dist && tsc && npm run build:cjs"
@@ -48,24 +46,22 @@
   "homepage": "https://github.com/thoughtspile/banditypes#readme",
   "devDependencies": {
     "@types/node": "^18.14.1",
-    "c8": "^7.13.0",
-    "esbuild": "^0.17.10",
-    "expect-type": "^0.15.0",
+    "c8": "^10.1.3",
+    "esbuild": "^0.24.2",
+    "expect-type": "^1.1.0",
     "nano-staged": "^0.8.0",
-    "pre-commit": "^1.2.2",
-    "prettier": "^2.8.4",
-    "superstruct": "^1.0.3",
-    "terser": "^5.16.4",
-    "typed": "^4.1.2",
-    "typescript": "^4.9.5",
+    "prettier": "^3.4.2",
+    "simple-git-hooks": "^2.11.1",
+    "superstruct": "^2.0.2",
+    "terser": "^5.37.0",
+    "typescript": "^5.7.2",
     "uvu": "^0.5.6",
-    "zod": "^3.20.6"
+    "zod": "^3.24.1"
   },
   "nano-staged": {
     "*": "prettier --loglevel silent --write"
   },
-  "precommit": [
-    "format:staged",
-    "test:coverage"
-  ]
+  "simple-git-hooks": {
+    "pre-commit": "./node_modules/.bin/nano-staged"
+  }
 }

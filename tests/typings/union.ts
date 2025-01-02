@@ -2,7 +2,7 @@ import { object, string, enums } from "$lib/index.js";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(
-  object({ a: string() }).or(object({ b: string() }))
+  object({ a: string() }).or(object({ b: string() })),
 ).returns.toEqualTypeOf<{ a: string } | { b: string }>();
 
 // Maximum call stack of 40 items
@@ -46,7 +46,7 @@ expectTypeOf(
     .or(enums(["37"]))
     .or(enums(["38"]))
     .or(enums(["39"]))
-    .or(enums(["40"]))
+    .or(enums(["40"])),
 ).returns.toEqualTypeOf<
   | "1"
   | "2"
