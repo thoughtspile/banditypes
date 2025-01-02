@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
     "lib": ["ES2017", "DOM"],
     "module": "es2020",
     "moduleResolution": "node",
