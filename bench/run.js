@@ -48,9 +48,9 @@ async function runSuite(dir) {
   console.log(`\n${dir}\n---`);
   console.log("\nbaseline", baseline);
 
-  for (const suite of ["zod", "superstruct", "checked"]) {
+  for (const suite of ["zod", "superstruct", "banditypes"]) {
     const stats = await buildSuite(`${dir}/${suite}`);
-    console.log(`suite\n  `, stats);
+    console.log(`${suite}\n  `, stats);
     console.log(`${suite}:diff\n  `, diff(baseline, stats));
   }
 }
