@@ -17,7 +17,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "!dist/*.tsbuildinfo",
+    "!dist/**/*.tsbuildinfo",
     "!dist/src"
     "!dist/tests"
   ],
