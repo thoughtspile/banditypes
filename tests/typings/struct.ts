@@ -1,4 +1,4 @@
-import { banditype } from "$lib/index.js";
+import { banditype } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

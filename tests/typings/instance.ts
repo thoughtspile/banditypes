@@ -1,4 +1,4 @@
-import { instance } from "$lib/index.js";
+import { instance } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(instance(Date)).returns.toEqualTypeOf<Date>();

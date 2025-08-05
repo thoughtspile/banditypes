@@ -1,4 +1,4 @@
-import { objectLoose, number } from "$lib/index.js";
+import { objectLoose, number } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(objectLoose({ a: number() })).returns.toEqualTypeOf<{

@@ -15,6 +15,9 @@
       "require": "./dist/index.cjs"
     }
   },
+  "imports": {
+    "#lib": "./dist/banditypes.js"
+  },
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
@@ -26,10 +29,10 @@
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test:types": "tsc && tsc -p tests/tsconfig.dts.json --noEmit",
-    "test:runtime": "rm -f dist/tests/**/*.{ts,js} && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
+    "test:types": "tsc && tsc -p tests --noEmit",
+    "test:runtime": "vite build && uvu tests '.test.js$'",
     "test": "npm run test:types && npm run test:runtime",
-    "test:coverage": "c8 --100 --exclude dist/tests npm test",
+    "test:coverage": "c8 --100 --exclude tests npm test",
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --loglevel silent --write .",
     "size": "node bench/run",

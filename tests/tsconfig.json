@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "module": "esnext",
+    "noEmit": true,
+    "checkJs": true,
+    "allowJs": true,
     "paths": {
-      "$lib/*": ["../src/*"]
-    },
-    "incremental": true,
-    "tsBuildInfoFile": "../dist/test.tsbuildinfo"
+      "#lib": ["../src/index.ts"]
+    }
   },
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.js"]
 }

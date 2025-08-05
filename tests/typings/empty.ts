@@ -1,4 +1,4 @@
-import { string, array, map, set, fail, unknown } from "$lib/index.js";
+import { string, array, map, set, fail, unknown } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(
