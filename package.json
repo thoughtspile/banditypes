@@ -11,9 +11,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/banditypes.js",
-      "require": "./dist/banditypes.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/banditypes.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/banditypes.cjs"
+      }
     }
   },
   "imports": {
@@ -31,7 +36,9 @@
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --loglevel silent --write .",
     "size": "node bench/run",
-    "build": "vite build && tsc"
+    "build:types": "tsc && cp dist/index.d.ts dist/index.d.cts",
+    "build": "vite build && npm run build:types",
+    "publint": "npm run build && npx publint && npx -y @arethetypeswrong/cli --pack"
   },
   "repository": {
     "type": "git",
