@@ -24,7 +24,9 @@
   "imports": {
     "#lib": "./dist/banditypes.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": "^14 || ^16 || >=18"
   },
