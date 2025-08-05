@@ -1,4 +1,4 @@
-import { type Infer, object } from "$lib/index.js";
+import { type Infer, object } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 const Struct = object({});

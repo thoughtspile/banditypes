@@ -1,4 +1,4 @@
-import { tuple, string, number, enums } from "$lib/index.js";
+import { tuple, string, number, enums } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(tuple([string(), number()] as const)).returns.toEqualTypeOf<

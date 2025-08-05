@@ -6,34 +6,41 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "module": "./dist/index.js",
-  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/banditypes.js",
+  "main": "./dist/banditypes.cjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/cjs/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/banditypes.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/banditypes.cjs"
+      }
     }
   },
-  "types": "./dist/index.d.ts",
+  "imports": {
+    "#lib": "./dist/banditypes.js"
+  },
   "files": [
-    "dist",
-    "!dist/**/*.tsbuildinfo",
-    "!dist/src"
-    "!dist/tests"
+    "dist"
   ],
   "engines": {
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test:types": "tsc && tsc -p tests/tsconfig.dts.json --noEmit",
-    "test:runtime": "rm -f dist/tests/**/*.{ts,js} && tsc -p tests/tsconfig.json && uvu dist/tests '.test.js$'",
+    "test:types": "tsc && tsc -p tests --noEmit",
+    "test:runtime": "vite build && node --test tests",
     "test": "npm run test:types && npm run test:runtime",
-    "test:coverage": "c8 --100 --exclude dist/tests npm test",
+    "test:coverage": "c8 --100 --exclude tests npm test",
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --loglevel silent --write .",
     "size": "node bench/run",
-    "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/index.js dist/cjs/index.cjs",
-    "build": "rm -rf dist && tsc && npm run build:cjs"
+    "build:types": "tsc && cp dist/index.d.ts dist/index.d.cts",
+    "build": "vite build && npm run build:types",
+    "publint": "npm run build && npx publint && npx -y @arethetypeswrong/cli --pack"
   },
   "repository": {
     "type": "git",
@@ -53,15 +60,16 @@
   "devDependencies": {
     "@types/node": "^18.14.1",
     "c8": "^10.1.3",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.8",
     "expect-type": "^1.1.0",
     "nano-staged": "^0.8.0",
     "prettier": "^3.4.2",
+    "publint": "^0.3.12",
     "simple-git-hooks": "^2.11.1",
     "superstruct": "^2.0.2",
     "terser": "^5.37.0",
     "typescript": "^5.7.2",
-    "uvu": "^0.5.6",
+    "vite": "^6.3.5",
     "zod": "^3.24.1"
   },
   "nano-staged": {

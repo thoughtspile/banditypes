@@ -1,4 +1,4 @@
-import { func } from "$lib/index.js";
+import { func } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(func()).returns.toEqualTypeOf<(...args: unknown[]) => unknown>();

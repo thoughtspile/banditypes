@@ -1,4 +1,4 @@
-import { map, string, number } from "$lib/index.js";
+import { map, string, number } from "#lib";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(map(string(), number())).returns.toEqualTypeOf<
