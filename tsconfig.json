@@ -13,7 +13,7 @@
     "rootDirs": ["./src"],
     "strictNullChecks": true,
     "target": "ES2018",
-    "incremental": true
+    "emitDeclarationOnly": true
   },
   "include": ["src"]
 }
