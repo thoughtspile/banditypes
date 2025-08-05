@@ -9,5 +9,5 @@
     }
   },
   "extends": "../tsconfig.json",
-  "include": ["./**/*.js"]
+  "include": ["./**/*.js", "./**/*.ts"]
 }

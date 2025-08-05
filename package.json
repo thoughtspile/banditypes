@@ -7,7 +7,8 @@
   "type": "module",
   "sideEffects": false,
   "module": "./dist/index.js",
-  "main": "./dist/cjs/index.cjs",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,19 +19,13 @@
   "imports": {
     "#lib": "./dist/banditypes.js"
   },
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "!dist/**/*.tsbuildinfo",
-    "!dist/src"
-    "!dist/tests"
-  ],
+  "files": ["dist"],
   "engines": {
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
     "test:types": "tsc && tsc -p tests --noEmit",
-    "test:runtime": "vite build && uvu tests '.test.js$'",
+    "test:runtime": "vite build && node --test tests",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude tests npm test",
     "lint": "prettier --check --log-level warn .",
