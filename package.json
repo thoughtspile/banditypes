@@ -6,14 +6,14 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
+  "module": "./dist/banditypes.js",
+  "main": "./dist/banditypes.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/banditypes.js",
+      "require": "./dist/banditypes.cjs"
     }
   },
   "imports": {
@@ -55,6 +55,7 @@
     "expect-type": "^1.1.0",
     "nano-staged": "^0.8.0",
     "prettier": "^3.4.2",
+    "publint": "^0.3.12",
     "simple-git-hooks": "^2.11.1",
     "superstruct": "^2.0.2",
     "terser": "^5.37.0",
