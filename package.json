@@ -15,6 +15,12 @@
     }
   },
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo",
+    "!dist/src"
+    "!dist/tests"
+  ],
   "engines": {
     "node": "^14 || ^16 || >=18"
   },
