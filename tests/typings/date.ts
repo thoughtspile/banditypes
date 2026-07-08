@@ -1,4 +1,4 @@
-import { instance, fail } from "#lib";
+import { instance, fail } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

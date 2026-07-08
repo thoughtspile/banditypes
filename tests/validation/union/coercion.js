@@ -1,4 +1,4 @@
-import { string, number } from "#lib";
+import { string, number } from "banditypes";
 
 const A = string().or(() => "foo");
 const B = number();

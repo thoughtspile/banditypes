@@ -1,4 +1,4 @@
-import { lazy, string } from "#lib";
+import { lazy, string } from "banditypes";
 
 export const Struct = lazy(() => string());
 

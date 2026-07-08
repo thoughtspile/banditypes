@@ -1,4 +1,4 @@
-import { never } from "#lib";
+import { never } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(never()).returns.toEqualTypeOf<never>();

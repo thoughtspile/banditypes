@@ -1,4 +1,4 @@
-import { func } from "#lib";
+import { func } from "banditypes";
 
 export const Struct = func();
 

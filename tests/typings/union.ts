@@ -1,4 +1,4 @@
-import { object, string, enums } from "#lib";
+import { object, string, enums } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

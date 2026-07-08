@@ -1,4 +1,4 @@
-import { set, unknown } from "#lib";
+import { set, unknown } from "banditypes";
 
 export const Struct = set(unknown());
 

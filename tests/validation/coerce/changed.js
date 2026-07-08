@@ -1,4 +1,4 @@
-import { unknown } from "#lib";
+import { unknown } from "banditypes";
 
 export const Struct = unknown().map((x) => (x == null ? "unknown" : x));
 

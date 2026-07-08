@@ -1,4 +1,4 @@
-import { enums } from "#lib";
+import { enums } from "banditypes";
 
 export const Struct = enums([1, 2]);
 

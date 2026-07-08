@@ -1,4 +1,4 @@
-import { lazy, fail, string } from "#lib";
+import { lazy, fail, string } from "banditypes";
 
 export const Struct = lazy(() =>
   string().map((s) => (s.length > 0 ? s : fail())),

@@ -1,4 +1,4 @@
-import { number } from "#lib";
+import { number } from "banditypes";
 
 export const Struct = number().or(() => 42);
 

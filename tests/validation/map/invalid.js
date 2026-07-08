@@ -1,4 +1,4 @@
-import { map, string, number } from "#lib";
+import { map, string, number } from "banditypes";
 
 export const Struct = map(string(), number());
 

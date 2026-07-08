@@ -1,4 +1,4 @@
-import { object, number, string, type Cast } from "#lib";
+import { object, number, string, type Cast } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(object({})).returns.toEqualTypeOf<Record<string, never>>();

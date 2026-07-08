@@ -1,4 +1,4 @@
-import { boolean } from "#lib";
+import { boolean } from "banditypes";
 
 export const Struct = boolean();
 

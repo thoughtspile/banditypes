@@ -1,4 +1,4 @@
-import { objectLoose, string, number } from "#lib";
+import { objectLoose, string, number } from "banditypes";
 
 const A = objectLoose({ a: string() });
 const B = objectLoose({ b: number() });

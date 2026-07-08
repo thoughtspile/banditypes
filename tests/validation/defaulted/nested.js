@@ -1,4 +1,4 @@
-import { string, object } from "#lib";
+import { string, object } from "banditypes";
 
 export const Struct = object({
   title: string().or(() => "Untitled"),

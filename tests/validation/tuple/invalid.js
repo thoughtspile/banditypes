@@ -1,4 +1,4 @@
-import { tuple, string, number } from "#lib";
+import { tuple, string, number } from "banditypes";
 
 export const Struct = tuple([string(), number()]);
 

@@ -1,4 +1,4 @@
-import { instance } from "#lib";
+import { instance } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(instance(Date)).returns.toEqualTypeOf<Date>();

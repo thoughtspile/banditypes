@@ -1,4 +1,4 @@
-import { number, fail } from "#lib";
+import { number, fail } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

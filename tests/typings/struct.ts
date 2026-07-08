@@ -1,4 +1,4 @@
-import { banditype } from "#lib";
+import { banditype } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(

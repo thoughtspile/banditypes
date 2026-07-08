@@ -1,4 +1,4 @@
-import { optional, string, number, object, enums } from "#lib";
+import { optional, string, number, object, enums } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(string().or(optional())).returns.toEqualTypeOf<

@@ -1,4 +1,4 @@
-import { object } from "#lib";
+import { object } from "banditypes";
 
 export const Struct = object({});
 

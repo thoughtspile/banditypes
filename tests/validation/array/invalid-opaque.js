@@ -1,4 +1,4 @@
-import { array, unknown } from "#lib";
+import { array, unknown } from "banditypes";
 
 export const Struct = array(unknown());
 

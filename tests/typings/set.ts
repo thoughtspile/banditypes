@@ -1,4 +1,4 @@
-import { set, string } from "#lib";
+import { set, string } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(set(string())).returns.toEqualTypeOf<Set<string>>();

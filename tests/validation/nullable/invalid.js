@@ -1,4 +1,4 @@
-import { number, nullable } from "#lib";
+import { number, nullable } from "banditypes";
 
 export const Struct = number().or(nullable());
 
