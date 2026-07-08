@@ -32,14 +32,14 @@
   },
   "scripts": {
     "test:types": "tsc && tsc -p tests --noEmit",
-    "test:runtime": "vite build && node --test tests/index.test.js",
+    "test:runtime": "tsup && node --test tests/index.test.js",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude tests npm test",
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --log-level silent --write .",
     "size": "node bench/run",
     "build:types": "tsc && cp dist/index.d.ts dist/index.d.cts",
-    "build": "vite build && npm run build:types",
+    "build": "tsup && npm run build:types",
     "publint": "npm run build && npx publint && npx -y @arethetypeswrong/cli --pack"
   },
   "repository": {
@@ -60,7 +60,7 @@
   "devDependencies": {
     "@types/node": "^18.14.1",
     "c8": "^10.1.3",
-    "esbuild": "^0.25.12",
+    "esbuild": "^0.27.0",
     "expect-type": "^1.4.0",
     "nano-staged": "^0.8.0",
     "prettier": "^3.9.4",
@@ -69,7 +69,7 @@
     "superstruct": "^2.0.2",
     "terser": "^5.48.0",
     "typescript": "^5.9.3",
-    "vite": "^6.4.3",
+    "tsup": "^8.5.0",
     "zod": "^3.25.76"
   },
   "nano-staged": {
