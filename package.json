@@ -36,7 +36,7 @@
     "test:runtime": "npm run build:js && node --test tests/index.test.js",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude tests npm test",
-    "size": "node bench/run",
+    "size": "npm run build && node bench/run",
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --log-level silent --write .",
     "publint": "npm run build && npx publint && npx -y @arethetypeswrong/cli --pack"
@@ -68,7 +68,7 @@
     "superstruct": "^2.0.2",
     "terser": "^5.48.0",
     "typescript": "^5.9.3",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "nano-staged": {
     "*": "prettier --log-level silent --write"
