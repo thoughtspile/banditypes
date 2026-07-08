@@ -1,4 +1,4 @@
-import { array, number, unknown } from "#lib";
+import { array, number, unknown } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(array(unknown())).returns.toEqualTypeOf<unknown[]>();

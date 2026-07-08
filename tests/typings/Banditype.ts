@@ -15,7 +15,7 @@ import {
   optional,
   set,
   unknown,
-} from "#lib";
+} from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(array(string())).toEqualTypeOf<Banditype<Array<string>>>();

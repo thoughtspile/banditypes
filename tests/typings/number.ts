@@ -1,4 +1,4 @@
-import { number } from "#lib";
+import { number } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(number()).returns.toEqualTypeOf<number>();

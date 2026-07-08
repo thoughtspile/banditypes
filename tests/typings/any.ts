@@ -1,4 +1,4 @@
 import { expectTypeOf } from "expect-type";
-import { banditype } from "#lib";
+import { banditype } from "banditypes";
 
 expectTypeOf(banditype<any>((raw) => raw)).returns.toEqualTypeOf<any>();

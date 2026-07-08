@@ -1,4 +1,4 @@
-import { number, optional } from "#lib";
+import { number, optional } from "banditypes";
 
 export const Struct = number().or(optional());
 

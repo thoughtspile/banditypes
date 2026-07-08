@@ -1,4 +1,4 @@
-import { string, number, object } from "#lib";
+import { string, number, object } from "banditypes";
 
 const A = string();
 const B = object({ a: number(), b: number().or(() => 5) });

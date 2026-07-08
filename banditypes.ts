@@ -24,7 +24,7 @@ export const banditype = <T>(cast: Cast<T>): Banditype<T> => {
     banditype((raw) => {
       try {
         return cast(raw);
-      } catch (err) {
+      } catch {
         return extra(raw);
       }
     });

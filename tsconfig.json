@@ -6,14 +6,14 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": ["ES2017", "DOM"],
-    "module": "es2020",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "noUncheckedIndexedAccess": true,
     "outDir": "dist",
-    "rootDirs": ["./src"],
+    "rootDir": ".",
     "strictNullChecks": true,
     "target": "ES2018",
     "emitDeclarationOnly": true
   },
-  "include": ["src"]
+  "include": ["banditypes.ts", "tests"]
 }

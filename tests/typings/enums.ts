@@ -1,4 +1,4 @@
-import { enums } from "#lib";
+import { enums } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf((x) => {

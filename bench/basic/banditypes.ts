@@ -6,7 +6,7 @@ import {
   object,
   nullable,
   optional,
-} from "../../src";
+} from "banditypes";
 import { sample, type Data } from "./sample";
 
 const schema = object<Data>({

@@ -1,4 +1,4 @@
-import { string, object, fail } from "#lib";
+import { string, object, fail } from "banditypes";
 
 const PasswordValidator = string().map((pw) => (pw.length >= 8 ? pw : fail()));
 const changePasswordStruct = object({

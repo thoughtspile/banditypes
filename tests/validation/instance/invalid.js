@@ -1,4 +1,4 @@
-import { instance } from "#lib";
+import { instance } from "banditypes";
 
 export const Struct = instance(Array);
 

@@ -1,4 +1,4 @@
-import { fail, number } from "#lib";
+import { fail, number } from "banditypes";
 
 export const Struct = number().map((v) => (v > 0 ? v : fail()));
 

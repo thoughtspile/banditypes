@@ -1,4 +1,4 @@
-import { type Infer, object } from "#lib";
+import { type Infer, object } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 const Struct = object({});

@@ -1,4 +1,4 @@
-import { string } from "#lib";
+import { string } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(string().or(() => "default")).returns.toEqualTypeOf<string>();

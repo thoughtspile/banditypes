@@ -1,4 +1,4 @@
-import { record, string, number } from "#lib";
+import { record, string, number } from "banditypes";
 
 export const Struct = record(number());
 

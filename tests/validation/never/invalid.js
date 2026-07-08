@@ -1,4 +1,4 @@
-import { never } from "#lib";
+import { never } from "banditypes";
 
 export const Struct = never();
 

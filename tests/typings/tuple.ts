@@ -1,4 +1,4 @@
-import { tuple, string, number, enums } from "#lib";
+import { tuple, string, number, enums } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 expectTypeOf(tuple([string(), number()] as const)).returns.toEqualTypeOf<

@@ -1,4 +1,4 @@
-import { map, unknown } from "#lib";
+import { map, unknown } from "banditypes";
 
 export const Struct = map(unknown(), unknown());
 

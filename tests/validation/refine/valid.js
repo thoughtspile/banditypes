@@ -1,4 +1,4 @@
-import { string, fail } from "#lib";
+import { string, fail } from "banditypes";
 
 export const Struct = string().map((x) => (x === data ? x : fail()));
 

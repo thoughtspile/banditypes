@@ -1,4 +1,4 @@
-import { object, number, string } from "#lib";
+import { object, number, string } from "banditypes";
 import { expectTypeOf } from "expect-type";
 
 const schemaA = { a: number() };
