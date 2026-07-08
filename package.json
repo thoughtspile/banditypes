@@ -28,17 +28,17 @@
     "node": "^14 || ^16 || >=18"
   },
   "scripts": {
-    "test:types": "npm run build:types && tsc --noEmit",
     "build:js": "esbuild banditypes.ts --outdir=dist",
     "build:cjs": "esbuild banditypes.ts --format=cjs --outfile=dist/banditypes.cjs",
+    "build:types": "tsc -p tsconfig.build.json && cp dist/banditypes.d.ts dist/banditypes.d.cts",
+    "build": "npm run build:js && npm run build:cjs && npm run build:types",
+    "test:types": "npm run build:types && tsc --noEmit",
     "test:runtime": "npm run build:js && node --test tests/index.test.js",
     "test": "npm run test:types && npm run test:runtime",
     "test:coverage": "c8 --100 --exclude tests npm test",
+    "size": "node bench/run",
     "lint": "prettier --check --log-level warn .",
     "lint:fix": "prettier --log-level silent --write .",
-    "size": "node bench/run",
-    "build:types": "tsc -p tsconfig.build.json && cp dist/banditypes.d.ts dist/banditypes.d.cts",
-    "build": "npm run build:js && npm run build:cjs && npm run build:types",
     "publint": "npm run build && npx publint && npx -y @arethetypeswrong/cli --pack"
   },
   "repository": {
